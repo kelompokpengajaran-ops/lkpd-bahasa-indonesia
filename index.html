@@ -22,14 +22,21 @@
         .pdf-mode {
             background: #ffffff !important;
             color: #000000 !important;
-            padding: 10px !important;
+            padding: 5px !important;
         }
-        .pdf-mode textarea {
-            border: 1px solid #333 !important;
-            background: #fdfdfd !important;
-            color: #000 !important;
-            resize: none;
+        .pdf-input {
+            width: 100%;
+            border: 1px solid #475569 !important;
+            background: #ffffff !important;
+            color: #000000 !important;
             padding: 8px !important;
+            border-radius: 8px;
+            font-size: 12px;
+            min-height: 50px;
+            outline: none;
+        }
+        .no-pdf {
+            display: inherit;
         }
         .pdf-mode .no-pdf {
             display: none !important;
@@ -123,22 +130,22 @@
                     <!-- 1. Identifikasi Fenomena -->
                     <div class="space-y-1.5">
                         <label class="block font-bold text-slate-800 text-xs">1. Bagian: Identifikasi Fenomena (Pernyataan Umum)</label>
-                        <textarea id="struct1_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
-                        <textarea id="struct1_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Identifikasi Fenomena..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct1_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="pdf-input"></textarea>
+                        <textarea id="struct1_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Identifikasi Fenomena..." class="pdf-input"></textarea>
                     </div>
 
                     <!-- 2. Urutan Sebab Akibat -->
                     <div class="space-y-1.5">
                         <label class="block font-bold text-slate-800 text-xs">2. Bagian: Urutan Sebab-Akibat (Deretan Penjelas)</label>
-                        <textarea id="struct2_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
-                        <textarea id="struct2_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Urutan Sebab-Akibat..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct2_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="pdf-input"></textarea>
+                        <textarea id="struct2_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Urutan Sebab-Akibat..." class="pdf-input"></textarea>
                     </div>
 
                     <!-- 3. Ulasan -->
                     <div class="space-y-1.5">
                         <label class="block font-bold text-slate-800 text-xs">3. Bagian: Ulasan (Interpretasi / Penutup)</label>
-                        <textarea id="struct3_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
-                        <textarea id="struct3_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Ulasan..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct3_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="pdf-input"></textarea>
+                        <textarea id="struct3_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Ulasan..." class="pdf-input"></textarea>
                     </div>
                 </div>
 
@@ -150,15 +157,15 @@
                     <div class="space-y-3 text-xs">
                         <div>
                             <label class="block font-bold text-slate-800 mb-1">1. Peristiwa apa yang dibahas dan bagaimana proses awal terjadinya?</label>
-                            <textarea id="q1" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
+                            <textarea id="q1" rows="2" placeholder="Tulis jawaban..." class="pdf-input"></textarea>
                         </div>
                         <div>
                             <label class="block font-bold text-slate-800 mb-1">2. Apa saja faktor atau penyebab utama fenomena tersebut?</label>
-                            <textarea id="q2" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
+                            <textarea id="q2" rows="2" placeholder="Tulis jawaban..." class="pdf-input"></textarea>
                         </div>
                         <div>
                             <label class="block font-bold text-slate-800 mb-1">3. Apa pelajaran atau dampak penting dari fenomena tersebut bagi manusia?</label>
-                            <textarea id="q3" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
+                            <textarea id="q3" rows="2" placeholder="Tulis jawaban..." class="pdf-input"></textarea>
                         </div>
                     </div>
                 </div>
@@ -362,10 +369,10 @@ Waktu: ${data.time}
             element.classList.add('pdf-mode');
 
             const opt = {
-                margin:       [0.3, 0.3, 0.3, 0.3],
+                margin:       [0.2, 0.2, 0.2, 0.2],
                 filename:     `LKPD_${document.getElementById('displayName').innerText.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
