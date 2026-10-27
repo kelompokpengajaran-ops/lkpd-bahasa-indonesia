@@ -19,7 +19,6 @@
         .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); }
         
-        /* CSS KHUSUS SAAT DICETAK KE PDF AGAR MIRIP LEMBAR KERJA RESMI */
         .pdf-mode {
             background: #ffffff !important;
             color: #000000 !important;
@@ -69,7 +68,7 @@
                     <i class="fa-solid fa-bolt-lightning text-3xl"></i>
                 </div>
                 <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Tantangan Balap Analisis Teks</h2>
-                <p class="text-slate-500 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak (tersedia 8 variasi teks untuk 32 siswa) dan mulai perlombaan!</p>
+                <p class="text-slate-500 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak (tersedia 8 variasi teks mendalam untuk 32 siswa) dan mulai perlombaan!</p>
 
                 <div class="space-y-4 text-left">
                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Nama Lengkap Siswa</label>
@@ -102,13 +101,13 @@
                 <div class="md:col-span-2"><span class="font-bold text-slate-600">Judul Teks Bacaan:</span> <span id="textTitle" class="font-extrabold text-slate-900"></span></div>
             </div>
 
-            <!-- Bacaan Teks (4 Paragraf) -->
+            <!-- Bacaan Teks (5 Paragraf, Minimal 5 Kalimat per Paragraf) -->
             <div class="border border-slate-300 rounded-xl p-5 bg-white">
-                <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open text-blue-600"></i> Teks Bacaan Eksplanasi
+                <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-blue-600"></i> Teks Bacaan Eksplanasi (5 Paragraf Mendalam)
                 </h4>
-                <div id="textContent" class="text-slate-800 leading-relaxed space-y-3 text-justify text-xs md:text-sm">
-                    <!-- Teks dimuat dinamis -->
+                <div id="textContent" class="text-slate-800 leading-relaxed space-y-4 text-justify text-xs md:text-sm">
+                    <!-- Paragraf terpisah otomatis dimuat di sini -->
                 </div>
             </div>
 
@@ -181,78 +180,86 @@
     </main>
 
     <script>
-        // 8 PILIHAN TEKS FENOMENA ALAM (MASING-MASING 4 PARAGRAF) UNTUK 32 SISWA
+        // 8 PILIHAN TEKS FENOMENA ALAM (5 PARAGRAF, MASING-MASING 5-6 KALIMAT)
         const naturalTexts = [
             {
                 title: "1. Proses Terjadinya Pelangi",
                 content: [
-                    "Pelangi merupakan salah satu fenomena alam optik dan meteorologi yang sangat mempesona serta kerap muncul di langit setelah hujan reda. Keindahan warna-warni melingkar yang menghiasi cakrawala ini tidak terjadi begitu saja, melainkan melalui proses ilmiah pembiasan dan penguraian cahaya matahari secara alami.",
-                    "Proses kemunculan pelangi bermula ketika butir-butir air hujan yang masih melayang di atmosfer bertindak sebagai prisma optik alami. Ketika sinar matahari putih menembus butiran air tersebut, kecepatan cahaya melambat dan dibelokkan atau dibiaskan dari medium udara ke medium air dengan sudut bias yang berbeda-beda.",
-                    "Selain dibiaskan, cahaya matahari juga mengalami penguraian warna atau dispersi di dalam butiran air hujan. Spektrum warna putih matahari terurai menjadi komponen warna kasat mata yang terdiri dari merah, jingga, kuning, hijau, biru, indigo, dan ungu. Setiap warna memiliki panjang gelombang unik yang menentukan tingkat kemiringan lengkungannya di langit.",
-                    "Kehadiran pelangi di alam bebas tidak hanya memberikan suguhan visual yang mengagumkan bagi siapa pun yang menyaksikannya, tetapi juga menjadi bukti nyata bagaimana siklus hidrologi dan hukum fisika optik bekerja secara harmonis di bumi kita tercinta."
+                    "Pelangi merupakan salah satu fenomena alam optik dan meteorologi yang sangat mempesona serta kerap muncul di langit setelah hujan reda. Keindahan warna-warni melingkar yang menghiasi cakrawala ini tidak terjadi begitu saja secara kebetulan. Fenomena tersebut muncul melalui proses ilmiah pembiasan dan penguraian cahaya matahari secara alami. Kehadirannya selalu berhasil memukau setiap mata yang menyaksikannya di ruang terbuka. Oleh karena itu, pelangi menjadi salah satu objek kajian menarik dalam ilmu fisika.",
+                    "Proses kemunculan pelangi bermula ketika butir-butir air hujan yang masih melayang di atmosfer bertindak sebagai prisma optik alami. Sinar matahari pagi atau sore hari menyorot butiran air tersebut dari sudut tertentu. Ketika sinar matahari putih menembus butiran air, kecepatan cahaya mendadak melambat. Cahaya tersebut kemudian dibelokkan atau dibiaskan dari medium udara ke medium air.",
+                    "Selain mengalami pembiasan, cahaya putih matahari juga mengalami penguraian warna atau dispersi di dalam butiran air hujan. Spektrum warna asli matahari yang tampak putih ternyata terurai menjadi berbagai komponen warna. Komponen warna tersebut terdiri dari merah, jingga, kuning, hijau, biru, indigo, dan ungu. Setiap warna ternyata memiliki panjang gelombang yang berbeda-beda satu sama lain.",
+                    "Perbedaan panjang gelombang ini menyebabkan sudut pembiasan setiap warna juga menjadi tidak sama. Warna merah dibelokkan dengan sudut paling kecil, sedangkan warna ungu dibelokkan dengan sudut paling besar. Akibatnya, terjadilah pemisahan warna yang membentuk garis lengkung indah di langit. Susunan warna ini selalu konsisten dan tidak pernah tertukar urutannya.",
+                    "Secara keseluruhan, fenomena pelangi membuktikan betapa hukum fisika optik bekerja secara harmonis di alam bebas. Kehadiran pelangi memberikan rasa kagum sekaligus menjadi pengingat keindahan siklus hidrologi di bumi. Manusia dapat mempelajari ilmu sains secara langsung melalui peristiwa menakjubkan ini."
                 ]
             },
             {
                 title: "2. Proses Terjadinya Gempa Bumi",
                 content: [
-                    "Gempa bumi adalah peristiwa getaran, guncangan, atau gerakan bergelombang yang terjadi di permukaan bumi akibat pelepasan energi secara tiba-tiba dari dalam lapisan kerak bumi. Fenomena alam ini termasuk salah satu bencana yang paling sering diamati dan dipelajari dalam ilmu geofisika modern.",
-                    "Secara umum, penyebab utama terjadinya gempa bumi adalah pergerakan lempeng tektonik yang menyusun lapisan litosfer bumi. Lempeng-lempeng raksasa ini senantiasa bergerak secara konstan dan lambat di atas lapisan mantel bumi yang bersifat cair liat, dengan kecepatan beberapa sentimeter per tahunnya.",
-                    "Ketika dua lempeng tektonik saling bertumbukan, bergesekan, atau saling menjauh, terjadi penumpukan tekanan dan akumulasi energi yang sangat besar di sepanjang garis batas patahan atau zona subduksi. Pada titik jenuh tertentu, batuan kerak bumi tidak lagi sanggup menahan beban tekanan tersebut, sehingga terjadi patahan mendadak yang memuntahkan energi dalam bentuk gelombang seismik.",
-                    "Gelombang seismik inilah yang merambat ke segala arah hingga mencapai permukaan bumi dan menyebabkan guncangan hebat pada bangunan serta tanah. Oleh karena itu, pemahaman mendalam mengenai mitigasi bencana gempa sangat krusial bagi keselamatan masyarakat di zona rawan."
+                    "Gempa bumi adalah peristiwa getaran, guncangan, atau gerakan bergelombang yang terjadi di permukaan bumi secara tiba-tiba. Peristiwa alam ini diakibatkan oleh adanya pelepasan energi dari bawah tanah secara mendadak. Fenomena tersebut termasuk salah satu bencana alam yang paling sering dipelajari dalam ilmu geofisika. Dampak yang ditimbulkannya sering kali merusak kawasan permukiman penduduk. Oleh sebab itu, kewaspadaan tinggi sangat dibutuhkan oleh masyarakat.",
+                    "Secara umum, penyebab utama terjadinya gempa bumi adalah pergerakan lempeng tektonik yang menyusun lapisan kerak bumi. Planet bumi kita tersusun atas beberapa lapisan lempeng batuan raksasa yang tidak diam. Lempeng-lempeng tersebut senantiasa bergerak secara konstan di atas mantel bumi. Kecepatan pergerakan lempeng ini biasanya diukur dalam skala sentimeter per tahun.",
+                    "Ketika dua lempeng tektonik saling bergesekan, bertubrukan, atau saling menjauh, terjadi akumulasi tekanan yang sangat besar. Tekanan ini menumpuk secara terus-menerus di sepanjang garis batas patahan atau zona subduksi. Batuan di sekitar zona tersebut harus menahan beban tekanan energi yang sangat kuat. Kondisi ini berlangsung dalam kurun waktu yang cukup lama.",
+                    "Pada suatu titik tertentu, batuan kerak bumi sudah tidak lagi mampu menahan tekanan akumulasi energi tersebut. Akibatnya, terjadi patahan atau pelepasan energi secara mendadak di dalam perut bumi. Pelepasan energi ini kemudian memancar ke segala arah dalam bentuk gelombang seismik. Gelombang inilah yang merambat hingga ke permukaan bumi dan mengguncang tanah.",
+                    "Getaran gelombang seismik yang mencapai permukaan bumi menyebabkan tanah berguncang sangat hebat. Kekuatan guncangan ini diukur menggunakan alat seismograf dengan satuan magnitudo tertentu. Pemahaman mengenai mitigasi bencana gempa sangat krusial bagi keselamatan masyarakat. Terutama bagi warga yang tinggal di kawasan rawan pergerakan lempeng."
                 ]
             },
             {
                 title: "3. Proses Terjadinya Hujan Es",
                 content: [
-                    "Hujan es atau yang dalam dunia meteorologi sering disebut sebagai fenomena hail merupakan bentuk presipitasi unik berupa gumpalan atau bola-bola es yang jatuh meluncur ke permukaan bumi. Fenomena cuaca ekstrem ini umumnya sering terjadi pada masa pancaroba atau peralihan musim hujan ke musim kemarau.",
-                    "Proses terbentuknya hujan es diawali dengan pemanasan matahari yang sangat terik sejak pagi hari di permukaan bumi, yang kemudian memicu pembentukan awan cumulonimbus menjulang tinggi secara vertikal di atmosfer. Di dalam awan badai yang sangat dingin tersebut, terdapat arus udara naik vertikal yang kekuatannya sangat besar atau biasa disebut strong updraft.",
-                    "Arus udara naik yang kuat ini menghisap butir-butir air hujan menuju puncak awan yang suhunya berada di bawah titik beku, mengakibatkan air tersebut membeku menjadi butiran-butiran es padat. Karena gaya berat gravitasi, butiran es tersebut mulai jatuh ke bawah, namun terdorong naik kembali ke puncak awan oleh arus udara panas berulang kali, sehingga lapisan esnya semakin menumpuk dan bertambah besar.",
-                    "Ketika berat butiran es sudah melampaui kekuatan arus udara naik di dalam awan, butiran es raksasa tersebut akhirnya meluncur deras ke bumi sebagai hujan es lebat yang biasanya disertai hembusan angin kencang serta sambaran petir menyilaukan."
+                    "Hujan es atau yang dalam dunia meteorologi dikenal sebagai fenomena hail merupakan bentuk presipitasi ekstrem. Peristiwa ini berupa jatuhnya gumpalan atau bola-bola es padat ke permukaan bumi. Fenomena cuaca tersebut biasanya terjadi pada masa peralihan musim atau pancaroba. Masyarakat sering kali merasa kaget ketika butiran es turun bersamaan dengan hujan lebat. Kejadian ini didahului oleh cuaca panas terik sejak pagi hari.",
+                    "Proses terbentuknya hujan es diawali dengan pemanasan matahari yang sangat kuat sejak pagi hari di permukaan bumi. Pemanasan ini memicu penguapan air secara besar-besaran ke atmosfer bagian atas. Uap air tersebut kemudian berkondensasi dan membentuk pertumbuhan awan Cumulonimbus. Awan badai ini menjulang tinggi secara vertikal di langit dengan warna gelap.",
+                    "Di dalam awan Cumulonimbus yang sangat tinggi dan dingin tersebut, terdapat arus udara naik vertikal yang sangat kuat. Kekuatan arus udara naik ini dikenal luas dalam istilah meteorologi sebagai strong updraft. Arus udara panas ini menghisap butir-butir air hujan menuju ke puncak awan. Suhu di puncak awan tersebut berada jauh di bawah titik beku air.",
+                    "Setibanya di bagian atas awan, butiran air hujan langsung membeku menjadi butiran es padat. Karena dipengaruhi oleh gaya gravitasi bumi, butiran es tersebut mulai meluncur jatuh ke bawah. Namun, arus udara naik yang kuat kembali mendorong butiran es itu ke atas. Proses sirkulasi naik turun ini terjadi berulang kali hingga lapisan es semakin menumpuk.",
+                    "Ketika berat butiran es sudah melampaui kekuatan arus udara naik, es tidak dapat tertahan lagi. Butiran es raksasa tersebut akhirnya meluncur deras menembus atmosfer menuju permukaan bumi. Peristiwa ini biasanya disertai dengan tiupan angin kencang dan sambaran petir. Hujan es jarang berlangsung lama namun memiliki potensi kerusakan."
                 ]
             },
             {
                 title: "4. Proses Terjadinya Tsunami",
                 content: [
-                    "Tsunami adalah serangkaian gelombang laut raksasa yang timbul akibat perindahan volume air secara masif di dalam badan laut, umumnya terjadi karena gempa bumi bawah laut. Nama tsunami sendiri berasal dari bahasa Jepang yang berarti ombak besar di pelabuhan.",
-                    "Penyebab utama dari gelombang dahsyat ini adalah aktivitas tektonik bawah laut seperti gempa bumi vulkanik, longsor bawah laut, atau letusan gunung berapi maritim. Ketika dasar laut mengalami deformasi vertikal secara tiba-tiba akibat patahan lempeng, air laut di atasnya terdorong ke atas dan menciptakan gelombang dengan energi raksasa.",
-                    "Di tengah lautan lepas, gelombang tsunami bergerak dengan kecepatan ratusan kilometer per jam namun dengan ketinggian yang sangat rendah sehingga sering kali tidak terasa oleh kapal yang berlayar. Akan tetapi, ketika gelombang tersebut mendekati wilayah perairan dangkal pantai, kecepatan rambatnya melambat drastis sementara tinggi gelombangnya melonjak naik secara drastis hingga mencapai puluhan meter.",
-                    "Dampak kerusakan yang ditimbulkan oleh terjangan tsunami sangatlah masif dan destruktif bagi wilayah pesisir pantai. Oleh sebab itu, pemasangan sistem peringatan dini tsunami serta edukasi jalur evakuasi menjadi langkah penyelamatan jiwa yang sangat vital."
+                    "Tsunami adalah serangkaian gelombang laut raksasa yang timbul akibat perpindahan volume air secara masif. Peristiwa dahsyat ini umumnya terjadi di dalam badan laut akibat gempa bumi bawah laut. Nama tsunami sendiri berasal dari bahasa Jepang yang berarti ombak besar di pelabuhan. Kekuatan terjangan gelombang ini mampu menyapu bersih kawasan pesisir. Oleh sebab itu, tsunami menjadi salah satu bencana paling ditakuti.",
+                    "Penyebab utama dari gelombang tsunami adalah aktivitas tektonik bawah laut yang sangat ekstrem. Aktivitas tersebut meliputi gempa bumi tektonik dasar laut, longsor bawah laut, atau letusan gunung berapi maritim. Ketika dasar laut mengalami deformasi vertikal secara tiba-tiba akibat patahan, keseimbangan air laut terganggu. Pergeseran lempeng ini mendesak volume air laut dalam jumlah besar ke atas.",
+                    "Dorongan vertikal dari dasar laut tersebut menciptakan gelombang dengan kandungan energi yang luar biasa besar. Di tengah lautan lepas yang sangat luas, gelombang tsunami bergerak dengan kecepatan tinggi. Kecepatannya bisa mencapai ratusan kilometer per jam menyeberangi samudra. Namun, ketinggian gelombang di tengah laut lepas justru sangat rendah dan tidak terasa.",
+                    "Kondisi gelombang berubah drastis ketika mendekati wilayah perairan dangkal di dekat daratan pantai. Kecepatan rambat gelombang tsunami melambat secara drastis karena hambatan dasar laut. Sebaliknya, tinggi gelombang melonjak naik secara tajam dan vertikal hingga mencapai puluhan meter. Ombak raksasa ini menerjang daratan dengan daya rusak yang sangat masif.",
+                    "Dampak kehancuran yang ditimbulkan oleh terjangan tsunami sangatlah destruktif bagi lingkungan pesisir. Infrastruktur bangunan dan ribuan nyawa dapat melayang dalam waktu singkat. Oleh karena itu, pemasangan sistem peringatan dini sangat penting dilakukan. Edukasi jalur evakuasi kepada warga pesisir juga menjadi kunci keselamatan."
                 ]
             },
             {
                 title: "5. Proses Terjadinya Aurora",
                 content: [
-                    "Aurora merupakan fenomena alam pancaran cahaya terang menyala-vivid yang menari-nari indah di langit malam pada daerah lintang tinggi kutub bumi, baik di belahan bumi utara maupun selatan. Pemandangan spektakuler ini sering dijuluki sebagai salah satu keajaiban visual paling menakjubkan di muka bumi.",
-                    "Terjadinya aurora bermula dari aktivitas pelepasan partikel bermuatan listrik, seperti elektron dan proton, dari matahari melalui angin surya atau solar wind ke ruang angkasa. Partikel-partikel berenergi tinggi ini meluncur deras menembus tata surya hingga akhirnya tertarik oleh medan magnet gravitasi kutub bumi.",
-                    "Setibanya di lapisan atas atmosfer bumi (ionosfer), partikel-partikel matahari tersebut bertumbukan langsung dengan molekul gas nitrogen dan oksigen. Tumbukan partikel berkecepatan tinggi ini memicu eksitasi atom gas yang kemudian memancarkan energi cahaya berpendar warna-warni seperti hijau, merah, ungu, dan merah muda.",
-                    "Meskipun tampak sangat memesona dari permukaan bumi, keberadaan aurora juga mencerminkan interaksi dinamis yang kompleks antara pelindung medan magnet bumi dengan radiasi kosmik matahari yang berpotensi berbahaya bagi satelit."
+                    "Aurora merupakan fenomena alam pancaran cahaya terang menyala yang menghiasi langit malam. Pemandangan spektakuler ini biasanya terjadi di daerah lintang tinggi kutub bumi. Wilayah kutub utara mengenal fenomena ini sebagai Aurora Borealis. Sementara itu, wilayah kutub selatan menyebutnya sebagai Aurora Australis. Keindahan warna-warni aurora selalu memukau para wisatawan dunia.",
+                    "Terjadinya aurora bermula dari aktivitas pelepasan partikel bermuatan listrik dari matahari. Partikel tersebut terdiri dari elektron dan proton yang terlontar ke ruang angkasa. Aliran partikel ini dikenal luas sebagai angin surya atau solar wind. Partikel berenergi tinggi tersebut meluncur deras menembus tata surya kita. Perjalanan angin surya memakan waktu hingga mencapai planet bumi.",
+                    "Setibanya di sekitar planet bumi, partikel bermuatan listrik tersebut bereaksi dengan medan magnet bumi. Garis gaya magnet bumi menarik partikel surya menuju ke arah wilayah kutub. Medan magnet bumi bertindak sebagai perisai pelindung alami planet kita. Sebagian partikel berhasil masuk dan terjebak di lapisan atmosfer atas.",
+                    "Partikel matahari yang masuk kemudian bertumbukan langsung dengan molekul gas di atmosfer. Tumbukan terjadi dengan molekul gas nitrogen dan oksigen di lapisan ionosfer. Reaksi tumbukan berkecepatan tinggi ini memicu eksitasi atom gas tertentu. Hasil eksitasi tersebut memancarkan energi cahaya berpendar warna-warni yang indah.",
+                    "Pancaran cahaya aurora sering kali menampilkan warna hijau, merah, ungu, hingga merah muda. Meskipun tampak sangat memesona dari permukaan bumi, fenomena ini mencerminkan dinamika antariksa. Interaksi antara radiasi matahari dan medan magnet bumi berlangsung terus-menerus. Hal ini menunjukkan kompleksitas sistem pelindung planet kita."
                 ]
             },
             {
                 title: "6. Proses Terjadinya Angin Puting Beliung",
                 content: [
-                    "Angin puting beliung adalah fenomena pergerakan angin kencang berputar sangat kencang dengan kecepatan tinggi yang berbentuk corong menyerupai belalai gajah. Angin ribut ini bergerak secara destruktif merusak apa saja yang dilewatinya dalam durasi waktu yang relatif singkat.",
-                    "Fenomena cuaca ekstrem ini umumnya terbentuk pada siang atau sore hari saat musim pancaroba dari awan Cumulonimbus yang menjulang pekat. Perbedaan suhu udara yang mencolok antara lapisan bawah yang panas dan lapisan atas yang dingin menciptakan ketidakstabilan atmosfer yang memicu pusaran udara kuat.",
-                    "Pusaran angin berkecepatan tinggi ini tersedot ke bawah menyentuh permukaan tanah akibat adanya perbedaan tekanan udara yang ekstrem antara pusat badai dengan lingkungan sekitarnya. Kekuatan putarannya mampu menerbangkan atap rumah, merobohkan pohon besar, dan menimbulkan kepanikan warga.",
-                    "Meskipun wilayah terdampak puting beliung biasanya tidak terlalu luas, sifat destruktifnya menuntut kewaspadaan tinggi dari masyarakat, terutama saat melihat awan hitam gelap bergulung rendah di langit."
+                    "Angin puting beliung adalah fenomena pergerakan angin kencang yang berputar dengan kecepatan sangat tinggi. Pusaran angin ribut ini berbentuk corong menyerupai belalai gajah yang mengerikan. Peristiwa ekstrem tersebut bergerak secara destruktif merusak apa saja di jalurnya. Durasi terjadinya angin puting beliung biasanya berlangsung cukup singkat. Fenomena ini sering kali menimbulkan kepanikan warga.",
+                    "Penyebab utama terbentuknya angin puting beliung berkaitan erat dengan kondisi cuaca pancaroba. Fenomena ini umumnya terbentuk pada siang atau sore hari saat udara terasa panas gerah. Pemanasan matahari yang intens memicu pertumbuhan awan Cumulonimbus secara masif. Perbedaan suhu udara yang mencolok menjadi pemicu utama ketidakstabilan atmosfer.",
+                    "Ketidakstabilan atmosfer menciptakan perbedaan tekanan udara yang sangat ekstrim di dalam awan badai. Perbedaan tekanan ini memicu terbentuknya pusaran udara vertikal berkecepatan tinggi. Pusaran angin tersebut tersedot ke bawah hingga menyentuh permukaan tanah. Kekuatan isapan udara ini sangat berbahaya bagi lingkungan sekitar.",
+                    "Pusaran angin puting beliung memiliki daya rusak yang sangat kuat dan mematikan. Angin ini mampu menerbangkan atap rumah penduduk dengan mudah. Pohon-pohon besar di pinggir jalan juga tak luput dari tumbangan. Puing-puing bangunan terlempar ke udara akibat pusaran angin tersebut.",
+                    "Meskipun wilayah yang terdampak puting beliung biasanya tidak terlalu luas, sifatnya merusak. Kewaspadaan tinggi sangat diperlukan oleh masyarakat saat melihat awan gelap bergulung. Tanda-tanda alam ini menuntut warga untuk segera berlindung di tempat aman. Mitigasi dini dapat mengurangi risiko korban jiwa."
                 ]
             },
             {
                 title: "7. Proses Terjadinya Gerhana Matahari",
                 content: [
-                    "Gerhana matahari adalah peristiwa astronomis langka ketika posisi bulan terletak tepat di antara garis lurus antara bumi dan matahari, sehingga cahaya matahari terhalang sebagian atau seluruhnya. Peristiwa ini selalu memukau para ilmuwan dan masyarakat umum yang menyaksikannya.",
-                    "Proses terjadinya gerhana matahari bergantung sepenuhnya pada pergerakan orbit rotasi bulan mengelilingi bumi dan bumi mengelilingi matahari. Pada fase tertentu, bayangan gelap bulan (umbra dan penumbra) jatuh menimpa permukaan bumi di jalur lintasan tertentu.",
-                    "Ketika bayangan inti bulan menutupi piringan matahari secara sempurna, terjadilah gerhana matahari total di mana siang hari mendadak menjadi gelap gulita seperti malam hari dan korona matahari terlihat jelas. Sementara itu, wilayah di sekitarnya hanya mengalami gerhana matahari sebagian.",
-                    "Kehadiran gerhana matahari tidak hanya memperkaya pemahaman manusia mengenai mekanika tata surya, tetapi juga mengingatkan kita akan keteraturan hukum alam semesta yang maha luas."
+                    "Gerhana matahari adalah peristiwa astronomis langka yang menarik perhatian banyak orang. Peristiwa ini terjadi ketika posisi bulan terletak segaris di antara bumi dan matahari. Akibat posisi tersebut, cahaya matahari terhalang sebagian atau seluruhnya. Pengamat di bumi dapat menyaksikan pemandangan menakjubkan ini secara langsung. Fenomena gerhana selalu dicatat dalam sejarah ilmu astronomi.",
+                    "Proses terjadinya gerhana matahari bergantung pada pergerakan orbit benda langit. Pergerakan tersebut melibatkan rotasi bulan mengelilingi planet bumi. Secara bersamaan, bumi juga berputar mengelilingi matahari dalam garis edarnya. Perpotongan bidang orbit ini menciptakan momen kesejajaran sempurna. Momen inilah yang memicu terjadinya gerhana.",
+                    "Ketika posisi benda langit sejajar, bayangan gelap bulan jatuh menimpa permukaan bumi. Bayangan bulan tersebut terbagi menjadi dua bagian utama, yaitu umbra dan penumbra. Wilayah bumi yang tertutup oleh bayangan inti umbra akan mengalami gerhana total. Sementara itu, wilayah di sekitarnya hanya mengalami gerhana sebagian.",
+                    "Pada saat gerhana matahari total terjadi, piringan matahari tertutup sepenuhnya oleh bulan. Suasana siang hari mendadak berubah menjadi gelap gulita seperti malam hari. Korona matahari yang berpendar putih tampak jelas di sekeliling bulatan hitam bulan. Pengamat hewan sering kali menunjukkan perilaku kebingungan saat fenomena ini berlangsung.",
+                    "Kehadiran gerhana matahari memperkaya wawasan manusia mengenai mekanika tata surya. Peristiwa ini membuktikan keteraturan hukum alam semesta ciptaan Tuhan. Ilmuwan dapat memanfaatkan momen gerhana untuk meneliti atmosfer matahari. Masyarakat diimbau menggunakan kacamata khusus pelindung saat mengamatinya."
                 ]
             },
             {
                 title: "8. Proses Terjadinya Tanah Longsor",
                 content: [
-                    "Tanah longsor merupakan bencana geologi berupa pergerakan massa tanah atau batuan menuruni lereng bukit atau tebing akibat terganggunya kestabilan lereng tersebut. Peristiwa ini sering terjadi di daerah pegunungan atau perbukitan curam ketika musim penghujan tiba.",
-                    "Penyebab utama dari terjadinya longsor adalah kombinasi antara kemiringan lereng yang curam dengan tingginya curah hujan yang mengguyur secara terus-menerus. Air hujan yang meresap ke dalam pori-pori tanah akan menambah berat massa tanah sekaligus mengurangi kekuatan gesekan antarbutiran tanah di dalam lereng.",
-                    "Selain faktor air hujan, minimnya tutupan vegetasi atau pohon berakar kuat di atas lereng serta aktivitas pemotongan tebing yang tidak berwawasan lingkungan turut mempercepat terjadinya erosi dan keruntuhan struktur tanah. Ketika batas jenuh ketahanan lereng terlampaui, gaya gravitasi bumi menarik seluruh material longsor meluncur ke bawah dengan cepat.",
-                    "Mitigasi bencana tanah longsor seperti penanaman pohon penahan air, pembuatan terasering, dan menghindari pembangunan di zona rawan sangat penting untuk meminimalisasi korban jiwa dan kerugian harta benda."
+                    "Tanah longsor merupakan salah satu bencana geologi yang sering melanda wilayah perbukitan. Peristiwa ini berupa pergerakan massa tanah atau batuan menuruni lereng secara masif. Longsor biasanya dipicu oleh terganggunya kestabilan struktur tanah di lereng curam. Musim hujan menjadi waktu yang paling rawan terjadinya bencana ini. Ancaman longsor membahayakan keselamatan warga sekitar.",
+                    "Penyebab utama terjadinya tanah longsor adalah kombinasi kemiringan lereng dan curah hujan tinggi. Air hujan yang turun secara terus-menerus meresap ke dalam pori-pori tanah. Resapan air ini menambah berat beban massa tanah secara signifikan. Akibatnya, kohesi antarbutiran tanah di dalam lereng mulai melemah. Stabilitas lereng perlahan-lahan mulai terganggu.",
+                    "Selain faktor air hujan, kondisi geologis tanah turut memegang peranan penting. Lapisan tanah di atas batuan kedap air sering kali menjadi bidang gelincir longsor. Minimnya tutupan vegetasi atau pohon berakar kuat memperparah kondisi tersebut. Akar pohon berfungsi sebagai pasak alami yang mencengkeram struktur tanah lereng. Tanpa pohon, tanah menjadi sangat mudah tererosi.",
+                    "Aktivitas manusia yang tidak ramah lingkungan juga mempercepat risiko longsor. Contoh aktivitas tersebut meliputi pemotongan tebing tanpa kaidah teknis dan alih fungsi lahan. Ketika batas jenuh ketahanan lereng telah terlampaui, gaya gravitasi menarik massa tanah. Seluruh material lereng meluncur deras menimbun apa saja di bawahnya.",
+                    "Upaya mitigasi bencana tanah longsor sangat penting untuk diterapkan secara konsisten. Langkah pencegahan meliputi penanaman pohon berakar dalam dan pembuatan terasering lereng. Pembangunan pemukiman di zona rawan longsor harus dihindari sepenuhnya. Kesadaran masyarakat menjaga alam adalah kunci keselamatan."
                 ]
             }
         ];
@@ -268,7 +275,6 @@
                 return;
             }
 
-            // Memilih 1 dari 8 teks secara acak untuk 32 siswa
             const randomIndex = Math.floor(Math.random() * naturalTexts.length);
             selectedText = naturalTexts[randomIndex];
 
