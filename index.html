@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Interaktif Bahasa Indonesia Kelas 9 - Teks Eksplanasi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- html2pdf.js for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        fredoka: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fbcfe8 100%);
+            background-attachment: fixed;
+        }
+
+        .heading-font {
+            font-family: 'Fredoka', cursive;
+        }
+
+        /* Slot Machine & Shuffle Effect Animation */
+        @keyframes slotRoll {
+            0% { transform: translateY(0); filter: blur(0); }
+            50% { transform: translateY(-30px); filter: blur(3px); }
+            100% { transform: translateY(0); filter: blur(0); }
+        }
+
+        .slot-animating {
+            animation: slotRoll 0.15s infinite linear;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.8); }
+        }
+
+        .glow-box {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800">
+
+    <!-- Header Navigation -->
+    <header class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-40 border-b border-sky-100">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 bg-gradient-to-tr from-sky-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-sky-500/30">
+                    <i class="fa-solid fa-book-bookmark text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="heading-font text-xl font-bold text-slate-900 tracking-wide flex items-center gap-2">
+                        E-LKPD Bahasa Indonesia <span class="bg-amber-400 text-amber-950 text-xs px-2.5 py-0.5 rounded-full font-sans font-bold">Kelas 9 SMP</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 font-medium">Modul Pembelajaran Interaktif Analisis Teks Eksplanasi</p>
+                </div>
+            </div>
+            
+            <!-- Step Indicators -->
+            <div class="flex items-center space-x-1.5 text-xs font-bold bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+                <span id="nav-step-1" class="px-3 py-1.5 rounded-xl bg-sky-500 text-white shadow-sm">1. Presensi</span>
+                <i class="fa-solid fa-angle-right text-slate-400 text-[10px]"></i>
+                <span id="nav-step-2" class="px-3 py-1.5 rounded-xl text-slate-500">2. Acak Kelompok</span>
+                <i class="fa-solid fa-angle-right text-slate-400 text-[10px]"></i>
+                <span id="nav-step-3" class="px-3 py-1.5 rounded-xl text-slate-500">3. Pilih Teks</span>
+                <i class="fa-solid fa-angle-right text-slate-400 text-[10px]"></i>
+                <span id="nav-step-4" class="px-3 py-1.5 rounded-xl text-slate-500">4. LKPD</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex-grow w-full">
+
+        <!-- ================= TAHAP 1: INPUT PRESENSI SISWA ================= -->
+        <section id="section-step-1" class="space-y-6">
+            <div class="bg-white/90 backdrop-blur rounded-3xl p-6 md:p-8 shadow-xl border border-white">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-extrabold rounded-full mb-2">Langkah 1 dari 4</span>
+                        <h2 class="heading-font text-2xl md:text-3xl text-slate-900">Daftar Kehadiran Siswa Kelas 9</h2>
+                        <p class="text-slate-500 text-xs md:text-sm mt-1">Ketikkan nama lengkap/panggilan kamu untuk masuk ke dalam daftar hadir kelas hari ini.</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-gradient-to-br from-sky-50 to-indigo-50 px-5 py-3 rounded-2xl border border-sky-200">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center text-lg shadow-md">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Siswa Hadir</p>
+                            <p class="text-xl font-black text-sky-700"><span id="student-count">0</span> / 32 Siswa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Form -->
+                <div class="mt-6 max-w-xl mx-auto">
+                    <form id="form-attendance" class="flex gap-2">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-user-pen absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="input-student-name" required max="30"
+                                placeholder="Tuliskan nama siswa di sini..." 
+                                class="w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent text-sm transition">
+                        </div>
+                        <button type="submit" class="px-6 py-3.5 bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold rounded-2xl shadow-lg shadow-sky-500/30 transition flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </form>
+                    <p id="attendance-error" class="text-xs text-rose-500 mt-2 hidden text-center font-bold"></p>
+                </div>
+
+                <!-- Live Grid Nama Siswa -->
+                <div class="mt-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-check text-sky-500"></i> Siswa yang Sudah Presensi:
+                        </h3>
+                        <button id="btn-reset-attendance" class="text-xs text-slate-400 hover:text-rose-600 font-semibold transition">
+                            <i class="fa-solid fa-rotate-left"></i> Reset Daftar
+                        </button>
+                    </div>
+
+                    <div id="attendance-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 max-h-72 overflow-y-auto p-1">
+                        <div id="empty-attendance-msg" class="col-span-full py-12 text-center text-slate-400 border-2 border-dashed border-slate-200 rounded-2xl">
+                            <i class="fa-solid fa-id-card text-4xl mb-2 text-slate-300"></i>
+                            <p class="text-xs font-semibold">Belum ada siswa yang mengisi presensi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lock & Trigger Control Panel (Guru) -->
+            <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-3xl p-6 shadow-xl border border-amber-300">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center text-2xl text-white">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <div>
+                            <h3 class="heading-font text-lg font-bold">Panel Kontrol Guru</h3>
+                            <p class="text-xs text-amber-100">Jika seluruh siswa yang hadir sudah memasukkan nama, klik tombol untuk mengunci dan memulai pengacakan nama beranimasi.</p>
+                        </div>
+                    </div>
+                    <button id="btn-start-gacha" class="w-full md:w-auto px-8 py-4 bg-white text-amber-900 hover:bg-amber-50 font-black rounded-2xl shadow-xl active:scale-95 transition flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-dice-d20 text-xl text-amber-600"></i>
+                        <span>Kunci & Mulai Acak Nama!</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= TAHAP 2: ANIMASI PENGACAKAN KELOMPOK (GACHA) ================= -->
+        <section id="section-step-2" class="space-y-6 hidden">
+            <div class="bg-white/90 backdrop-blur rounded-3xl p-6 md:p-8 shadow-xl border border-white text-center">
+                
+                <!-- Gacha Screen / Animation Container -->
+                <div id="gacha-animation-box" class="py-8 space-y-6">
+                    <span class="inline-block px-4 py-1.5 bg-purple-100 text-purple-800 text-xs font-black rounded-full uppercase tracking-wider animate-pulse">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Mode Pengacakan Otomatis
+                    </span>
+                    <h2 class="heading-font text-3xl md:text-4xl text-slate-900">Mengacak Pembentukan Kelompok...</h2>
+                    <p class="text-slate-500 text-xs md:text-sm max-w-lg mx-auto">Sistem sedang mengocok nama seluruh siswa secara acak (Fisher-Yates) agar adil dan merata (4 orang per kelompok)!</p>
+
+                    <!-- Slot Machine Box -->
+                    <div class="max-w-md mx-auto bg-slate-900 p-6 rounded-3xl shadow-2xl border-4 border-amber-400 relative overflow-hidden glow-box">
+                        <div class="text-amber-400 text-xs font-black uppercase tracking-widest mb-3 flex justify-between items-center px-2">
+                            <span><i class="fa-solid fa-bolt"></i> Gacha Name Wheel</span>
+                            <span id="gacha-status-text">Mengocok...</span>
+                        </div>
+
+                        <!-- Display Slot Name -->
+                        <div class="bg-slate-800 rounded-2xl py-6 border-2 border-slate-700 shadow-inner my-2 relative overflow-hidden h-24 flex items-center justify-center">
+                            <div id="slot-name-display" class="heading-font text-2xl md:text-3xl font-extrabold text-amber-300 transition">
+                                ? ? ?
+                            </div>
+                        </div>
+
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 mt-4 overflow-hidden">
+                            <div id="gacha-progress-bar" class="bg-gradient-to-r from-amber-400 to-purple-500 h-2.5 rounded-full w-0 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <button id="btn-spin-now" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-black text-base rounded-2xl shadow-xl shadow-purple-500/30 active:scale-95 transition">
+                        <i class="fa-solid fa-play mr-2"></i> Putar Roda Acak Sekarang!
+                    </button>
+                </div>
+
+                <!-- Result Container (Appears after animation finishes) -->
+                <div id="gacha-result-box" class="hidden space-y-6 pt-4 text-left">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+                        <div>
+                            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-1">Pengacakan Selesai!</span>
+                            <h3 class="heading-font text-2xl text-slate-900">Hasil Pembagian Kelompok</h3>
+                            <p class="text-slate-500 text-xs">Setiap kelompok terdiri dari 4 siswa. Pilih kelompokmu untuk melanjutkan.</p>
+                        </div>
+                        <button id="btn-re-shuffle" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-rotate"></i> Acak Ulang Kelompok
+                        </button>
+                    </div>
+
+                    <!-- Grid Card Kelompok -->
+                    <div id="groups-result-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Card Groups Injected Here -->
+                    </div>
+
+                    <!-- Choose Active Group Dropdown -->
+                    <div class="mt-8 bg-gradient-to-r from-sky-50 to-indigo-50 p-6 rounded-3xl border border-sky-200 text-center space-y-4">
+                        <h4 class="heading-font text-xl text-slate-900">Pilih Kelompok Kamu untuk Memulai LKPD</h4>
+                        <p class="text-xs text-slate-600">Tentukan kelompok yang sedang menggunakan perangkat/laptop ini sekarang:</p>
+
+                        <div class="max-w-md mx-auto flex gap-2">
+                            <select id="select-active-group" class="flex-1 bg-white border border-sky-300 font-bold text-sky-900 rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                                <!-- Options dynamically rendered -->
+                            </select>
+                            <button id="btn-go-to-texts" class="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-2xl shadow-lg shadow-sky-500/20 transition flex items-center gap-2">
+                                Lanjut <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= TAHAP 3: PEMILIHAN TEKS BER-KUOTA ================= -->
+        <section id="section-step-3" class="space-y-6 hidden">
+            <div class="bg-white/90 backdrop-blur rounded-3xl p-6 md:p-8 shadow-xl border border-white">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-bold rounded-full mb-2">Langkah 3 dari 4</span>
+                        <h2 class="heading-font text-2xl md:text-3xl text-slate-900">Pilihan Teks Eksplanasi Kelas 9</h2>
+                        <p class="text-slate-500 text-xs md:text-sm mt-1">
+                            Kelompok Aktif: <span id="active-group-label" class="font-extrabold text-sky-600">Kelompok 1</span> 
+                            (<span id="active-group-members-label" class="italic text-slate-600">...</span>)
+                        </p>
+                    </div>
+                    <button id="btn-back-step2" class="text-xs text-slate-500 hover:text-slate-800 font-bold underline">
+                        &larr; Ganti Kelompok
+                    </button>
+                </div>
+
+                <!-- Info Kuota -->
+                <div class="my-4 bg-amber-50 border border-amber-200 p-4 rounded-2xl flex items-center gap-3 text-xs text-amber-900">
+                    <i class="fa-solid fa-circle-info text-amber-500 text-lg flex-shrink-0"></i>
+                    <p><strong>Ketentuan Kuota:</strong> Setiap judul teks eksplanasi hanya boleh dipilih oleh <strong>maksimal 2 kelompok</strong>. Jika kuota penuh (2/2), teks akan otomatis terkunci.</p>
+                </div>
+
+                <!-- Tabs Category Filter -->
+                <div class="flex justify-center my-6">
+                    <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-2">
+                        <button id="tab-cat-alam" class="px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition bg-sky-500 text-white shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-mountain-sun"></i> Fenomena Alam
+                        </button>
+                        <button id="tab-cat-sosial" class="px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+                            <i class="fa-solid fa-people-group"></i> Fenomena Sosial
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cards Grid Alam -->
+                <div id="grid-texts-alam" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards Teks Alam injected here -->
+                </div>
+
+                <!-- Cards Grid Sosial -->
+                <div id="grid-texts-sosial" class="grid grid-cols-1 md:grid-cols-3 gap-6 hidden">
+                    <!-- Cards Teks Sosial injected here -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= TAHAP 4: LEMBAR KERJA SISWA (LKPD INTERAKTIF) ================= -->
+        <section id="section-step-4" class="space-y-6 hidden">
+            <!-- Top Banner -->
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-700 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur text-white text-[10px] font-bold rounded-full mb-2 inline-block">Lembar Kerja Peserta Didik (LKPD)</span>
+                    <h2 id="lkpd-text-title" class="heading-font text-2xl md:text-3xl">Judul Teks Eksplanasi</h2>
+                    <p class="text-xs text-sky-100 mt-1">
+                        Dikerjakan oleh: <span id="lkpd-group-name" class="font-bold text-amber-300">Kelompok 1</span>
+                    </p>
+                </div>
+                <button id="btn-back-step3" class="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-xs font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i> Ganti Judul Teks
+                </button>
+            </div>
+
+            <!-- Main Layout: Left Read Text, Right Worksheet -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Left Column: Full Paragraph Reading Text (5 Cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- Guidance Info -->
+                    <div class="bg-sky-50 rounded-2xl p-5 border border-sky-200 text-xs">
+                        <h3 class="font-bold text-sky-900 text-sm mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-sky-600"></i> Petunjuk Analisis Kelas 9
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Bacalah teks eksplanasi utuh di bawah ini. Tentukan mana kalimat/paragraf yang menunjukkan <strong>Pernyataan Umum</strong>, <strong>Rangkaian Kejadian (Sebab-Akibat)</strong>, dan <strong>Ulasan (Penutup)</strong>. Berikan penjelasan alasan mengapa bagian tersebut termasuk struktur tersebut!
+                        </p>
+                    </div>
+
+                    <!-- Reading Box (Full Unbroken Paragraphs) -->
+                    <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-book-open text-sky-500"></i> Bahan Bacaan Teks
+                            </h3>
+                            <span id="lkpd-text-category" class="text-[10px] font-bold px-2.5 py-1 bg-slate-100 rounded-full text-slate-600">Alam</span>
+                        </div>
+
+                        <!-- UTUH PARAGRAF (NO STRUCTURE SPLIT LABELS) -->
+                        <div id="lkpd-text-content" class="prose prose-sm text-slate-700 leading-relaxed space-y-4 max-h-[550px] overflow-y-auto pr-2 text-justify">
+                            <!-- Plain unbroken paragraphs injected -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Worksheet Forms (7 Cols) -->
+                <div class="lg:col-span-7">
+                    <form id="form-lkpd" class="space-y-6">
+                        
+                        <!-- TUGAS 1: ANALISIS STRUKTUR TEKS -->
+                        <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 space-y-5">
+                            <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
+                                <div class="w-8 h-8 rounded-xl bg-sky-100 text-sky-700 font-black flex items-center justify-center text-sm">1</div>
+                                <div>
+                                    <h3 class="heading-font text-lg text-slate-900">Tugas 1: Analisis Struktur Teks Eksplanasi</h3>
+                                    <p class="text-xs text-slate-500">Salin kutipan teks & jelaskan alasan penentuan strukturnya.</p>
+                                </div>
+                            </div>
+
+                            <!-- Struktur A: Pernyataan Umum -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                                <label class="block text-xs font-bold text-sky-900">A. Pernyataan Umum / Identifikasi Fenomena</label>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Kutipan Kalimat / Paragraf dari Teks:</p>
+                                    <textarea id="ans-struct1-quote" required rows="2" placeholder="Salin kutipan teks yang merupakan pernyataan umum..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Alasan Mengapa Disebut Pernyataan Umum (Ciri Ciri):</p>
+                                    <input type="text" id="ans-struct1-reason" required placeholder="Contoh: Karena berisi definisi dasar dan latar belakang peristiwa..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Struktur B: Rangkaian Kejadian -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                                <label class="block text-xs font-bold text-indigo-900">B. Rangkaian Kejadian / Urutan Sebab-Akibat</label>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Kutipan Kalimat / Paragraf dari Teks:</p>
+                                    <textarea id="ans-struct2-quote" required rows="2" placeholder="Salin kutipan teks yang menjelaskan proses sebab akibat..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Alasan Mengapa Disebut Rangkaian Kejadian (Ciri Ciri):</p>
+                                    <input type="text" id="ans-struct2-reason" required placeholder="Contoh: Karena menguraikan tahapan dan sebab terjadinya fenomena..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Struktur C: Ulasan / Interpretasi -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                                <label class="block text-xs font-bold text-purple-900">C. Ulasan / Interpretasi (Penutup)</label>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Kutipan Kalimat / Paragraf dari Teks:</p>
+                                    <textarea id="ans-struct3-quote" required rows="2" placeholder="Salin kutipan bagian penutup/simpulan teks..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] text-slate-500 mb-1">Alasan Mengapa Disebut Ulasan (Ciri Ciri):</p>
+                                    <input type="text" id="ans-struct3-reason" required placeholder="Contoh: Karena berisi tanggapan akhir dan simpulan dari penulis..." class="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TUGAS 2: IDENTIFIKASI INFORMASI ISI TEKS -->
+                        <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 space-y-4">
+                            <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
+                                <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 font-black flex items-center justify-center text-sm">2</div>
+                                <div>
+                                    <h3 class="heading-font text-lg text-slate-900">Tugas 2: Identifikasi Informasi Isi Teks</h3>
+                                    <p class="text-xs text-slate-500">Jawablah pertanyaan diskusi pemahaman isi teks berikut.</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4 text-xs">
+                                <div>
+                                    <label class="block font-bold text-slate-800 mb-1">1. Apakah gagasan utama / ide pokok dari teks eksplanasi yang dibaca?</label>
+                                    <textarea id="ans-info-1" required rows="2" placeholder="Tuliskan gagasan utamanya..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-slate-800 mb-1">2. Sebutkan fakta-fakta penting yang ditemukan dalam teks tersebut!</label>
+                                    <textarea id="ans-info-2" required rows="2" placeholder="Sebutkan fakta ilmiah atau data sosial yang ada..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-slate-800 mb-1">3. Menurut analisis kelompokmu, apa penyebab utama & dampak fenomena ini?</label>
+                                    <textarea id="ans-info-3" required rows="2" placeholder="Jelaskan penyebab dan dampaknya..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-slate-800 mb-1">4. Apa simpulan / solusi / himbauan yang dapat diterapkan siswa Kelas 9?</label>
+                                    <textarea id="ans-info-4" required rows="2" placeholder="Tuliskan saran atau himbauan kelompok..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-base rounded-2xl shadow-xl shadow-emerald-500/20 active:scale-95 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-xl"></i> Selesaikan LKPD & Cetak Laporan PDF
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= MODAL RESULT & EXPORT PDF ================= -->
+        <div id="modal-pdf-preview" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+            <div class="bg-white rounded-3xl max-w-3xl w-full p-6 md:p-8 shadow-2xl space-y-6 my-8">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-square-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="heading-font text-xl text-slate-900">LKPD Selesai Dikumpulkan!</h3>
+                            <p class="text-xs text-slate-500">Tinjau ringkasan di bawah sebelum mengunduh file PDF untuk dikirim ke guru.</p>
+                        </div>
+                    </div>
+                    <button id="btn-close-pdf-modal" class="text-slate-400 hover:text-slate-600 p-2 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- PDF Sheet Printable Template -->
+                <div id="pdf-printable-sheet" class="bg-white p-6 rounded-2xl border border-slate-300 space-y-4 text-xs text-slate-800">
+                    <div class="border-b-2 border-slate-800 pb-3 text-center">
+                        <h2 class="font-black text-base text-slate-900 uppercase tracking-wide">LEMBAR KERJA PESERTA DIDIK (LKPD) INTERAKTIF</h2>
+                        <p class="font-bold text-slate-700">Mata Pelajaran: Bahasa Indonesia Kelas 9 SMP | Teks Eksplanasi</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <p><span class="font-bold">Kelompok:</span> <span id="pdf-out-group">Kelompok 1</span></p>
+                        <p><span class="font-bold">Judul Teks:</span> <span id="pdf-out-title">Judul Teks</span></p>
+                        <p class="col-span-2"><span class="font-bold">Anggota Kelompok:</span> <span id="pdf-out-members">...</span></p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-sky-800 border-b pb-1">1. Hasil Analisis Struktur Teks Eksplanasi</h4>
+                        
+                        <div class="p-2.5 bg-slate-50 rounded-lg border">
+                            <p class="font-bold text-sky-900">A. Pernyataan Umum</p>
+                            <p class="italic text-slate-600 my-1">"<span id="pdf-out-q1">...</span>"</p>
+                            <p><span class="font-bold">Alasan Ciri Struktur:</span> <span id="pdf-out-r1">...</span></p>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 rounded-lg border">
+                            <p class="font-bold text-indigo-900">B. Rangkaian Kejadian (Sebab-Akibat)</p>
+                            <p class="italic text-slate-600 my-1">"<span id="pdf-out-q2">...</span>"</p>
+                            <p><span class="font-bold">Alasan Ciri Struktur:</span> <span id="pdf-out-r2">...</span></p>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 rounded-lg border">
+                            <p class="font-bold text-purple-900">C. Ulasan (Penutup)</p>
+                            <p class="italic text-slate-600 my-1">"<span id="pdf-out-q3">...</span>"</p>
+                            <p><span class="font-bold">Alasan Ciri Struktur:</span> <span id="pdf-out-r3">...</span></p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <h4 class="font-bold text-indigo-800 border-b pb-1">2. Identifikasi Informasi & Isi Teks</h4>
+                        <div class="p-2.5 bg-slate-50 rounded-lg border space-y-1.5">
+                            <p><span class="font-bold">Gagasan Utama:</span> <span id="pdf-out-info1">...</span></p>
+                            <p><span class="font-bold">Fakta Penting:</span> <span id="pdf-out-info2">...</span></p>
+                            <p><span class="font-bold">Penyebab & Dampak:</span> <span id="pdf-out-info3">...</span></p>
+                            <p><span class="font-bold">Simpulan/Solusi:</span> <span id="pdf-out-info4">...</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-2">
+                    <button id="btn-download-pdf-now" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh File PDF Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Guide Banner Access Info Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <p class="text-xs font-bold text-slate-600">
+                <i class="fa-solid fa-globe text-sky-500 mr-1"></i> Cara Mengakses Aplikasi Ini di HP / Laptop Siswa di Kelas:
+            </p>
+            <p class="text-[11px] text-slate-500 max-w-2xl mx-auto">
+                Unggah file <code class="bg-slate-100 px-1.5 py-0.5 rounded border text-sky-700">index.html</code> ini secara gratis ke layanan seperti <strong>GitHub Pages</strong>, <strong>Netlify</strong>, atau <strong>Vercel</strong>. Bagikan tautan URL atau ubah menjadi QR Code agar 32 siswa dapat membukanya bersamaan melalui browser HP masing-masing di kelas!
+            </p>
+            <p class="text-[10px] text-slate-400">© 2026 E-LKPD Interaktif Bahasa Indonesia SMP Kelas 9</p>
+        </div>
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // ================= DATABASE TEKS EKSPLANASI KELAS 9 (PARAGRAF UTUH) =================
+        const TEXT_DATABASE = {
+            alam: [
+                {
+                    id: 'alam-1',
+                    title: 'Proses Terjadinya Gempa Bumi Tektonik',
+                    icon: 'fa-hill-rockslide',
+                    color: 'from-amber-500 to-orange-600',
+                    summary: 'Penjelasan utuh fenomena guncangan kerak bumi akibat pergerakan lempeng tektonik.',
+                    // UTUH PARAGRAF TANPA JUDUL PEMISAH STRUKTUR
+                    paragraphs: `
+                        Gempa bumi tektonik merupakan salah satu fenomena alam yang terjadi akibat pelepasan energi secara tiba-tiba di dalam kerak bumi. Pelepasan energi ini menghasilkan gelombang seismik yang merambat ke permukaan bumi dan menyebabkan guncangan hebat. Fenomena ini sering kali menimbulkan kerusakan infrastruktur hingga korban jiwa apabila terjadi dalam skala yang besar.
+
+                        Proses terjadinya gempa bumi tektonik berkaitan erat dengan pergerakan lempeng-lempeng tektonik yang menyusun kerak bumi. Lempeng-lempeng tersebut terus bergerak secara perlahan akibat adanya arus konveksi di lapisan mantel bumi. Ketika dua lempeng saling bertumbukan, bergeseran, atau menjauh, terjadi akumulasi energi tekan pada batuan di sepanjang garis patahan. Saat batuan tersebut tidak lagi mampu menahan tekanan yang amat kuat, batuan akan patah atau bergeser secara mendadak. Akibatnya, energi yang tersimpan dilepaskan seketika dalam bentuk gelombang seismik yang merambat ke segala arah hingga sampai ke permukaan bumi.
+
+                        Dapat disimpulkan bahwa gempa bumi tektonik adalah fenomena alam murni yang tidak dapat dihentikan oleh manusia. Meskipun waktu terjadinya gempa tidak dapat diprediksi secara pasti, dampak buruknya dapat diminimalkan melalui edukasi mitigasi bencana, simulasi evakuasi berkala, serta penerapan standar bangunan tahan gempa di daerah rawan bencana.
+                    `
+                },
+                {
+                    id: 'alam-2',
+                    title: 'Fenomena Terjadinya Tsunami',
+                    icon: 'fa-water',
+                    color: 'from-sky-500 to-blue-700',
+                    summary: 'Proses terbentuknya gelombang laut raksasa akibat dislokasi vertikal di dasar laut.',
+                    paragraphs: `
+                        Tsunami adalah fenomena gelombang laut berukuran sangat besar yang menjangkau daratan akibat adanya gangguan impulsif di dasar laut. Kata tsunami berasal dari bahasa Jepang, yaitu "tsu" yang berarti pelabuhan dan "nami" yang berarti gelombang. Fenomena ini menjadi salah satu bencana alam paling berbahaya bagi kawasan pesisir pantai.
+
+                        Tsunami biasanya dipicu oleh terjadinya gempa bumi tektonik di dasar laut yang memiliki kedalaman dangkal dengan magnitudo lebih dari 7,0 Skala Richter. Gempa tersebut menyebabkan terjadinya pergeseran atau dislokasi tanah dasar laut secara vertikal. Ketika dasar laut naik atau turun secara mendadak, volume air laut di atasnya ikut terganggu sehingga membentuk gelombang besar yang merambat dengan kecepatan sangat tinggi mencapai ratusan kilometer per jam. Saat gelombang ini mendekati pantai yang dangkal, kecepatan gelombang akan berkurang namun ketinggian air melambung tinggi hingga belasan meter sebelum menghantam daratan.
+
+                        Oleh karena itu, keberadaan sistem peringatan dini tsunami (early warning system) dan penanaman hutan mangrove di sepanjang garis pantai sangatlah vital. Masyarakat yang tinggal di daerah pesisir harus segera berlari ke tempat yang lebih tinggi apabila merasakan guncangan gempa kuat atau melihat air laut mendadak surut secara tidak wajar.
+                    `
+                },
+                {
+                    id: 'alam-3',
+                    title: 'Proses Terbentuknya Hujan Es',
+                    icon: 'fa-cloud-showers-water',
+                    color: 'from-cyan-500 to-teal-600',
+                    summary: 'Fenomena pembekuan kristal es di dalam awan Cumulonimbus saat cuaca ekstrem.',
+                    paragraphs: `
+                        Hujan es atau dalam istilah meteorologi dikenal sebagai hail adalah fenomena presipitasi cuaca ekstrem berupa jatuhnya bola-bola es padat dari atmosfer ke permukaan bumi. Fenomena ini sering kali mengejutkan masyarakat, terutama ketika terjadi di daerah beriklim tropis seperti Indonesia pada siang atau sore hari.
+
+                        Terbentuknya hujan es diawali dari adanya awan konvektif yang sangat tebal dan tinggi, yaitu awan Cumulonimbus (Cb). Di dalam awan ini, terdapat arus udara naik (updraft) yang sangat kuat. Arus udara ini membawa butiran-butiran air ke lapisan atas awan yang suhunya sangat dingin, yakni berada jauh di bawah titik beku nol derajat Celsius. Di lapisan yang sangat dingin tersebut, butiran air membeku menjadi kristal es. Kristal es ini akan terus bergerak naik-turun di dalam awan dan bertambah tebal karena terselimuti lapisan es baru. Ketika ukuran bola es sudah menjadi terlalu berat dan arus udara naik tidak mampu lagi menahannya, gumpalan es tersebut jatuh ke permukaan bumi sebelum sempat mencair sepenuhnya.
+
+                        Fenomena hujan es biasanya berlangsung singkat dan disertai hujan lebat serta angin kencang. Meskipun pemandangan ini terbilang langka dan menarik, masyarakat diimbau untuk segera berlindung di dalam bangunan yang kokoh demi menghindari risiko cedera atau kerusakan kendaraan akibat hantaman es.
+                    `
+                }
+            ],
+            sosial: [
+                {
+                    id: 'sosial-1',
+                    title: 'Penumpukan Sampah Plastik Lingkungan',
+                    icon: 'fa-bottle-water',
+                    color: 'from-emerald-600 to-green-700',
+                    summary: 'Analisis fenomena maraknya limbah plastik sekali pakai di lingkungan sekitar.',
+                    paragraphs: `
+                        Penumpukan sampah plastik merupakan salah satu fenomena sosial-lingkungan yang kini menjadi tantangan besar di berbagai daerah di Indonesia. Plastik yang awalnya diciptakan untuk mempermudah kehidupan manusia kini justru menjadi ancaman serius bagi kelestarian ekosistem akibat penggunaannya yang tidak terkendali.
+
+                        Fenomena ini bermula dari tingginya ketergantungan masyarakat terhadap kemasan plastik sekali pakai, seperti kantong belanja, sedotan, dan botol minuman. Kepraktisan dan harganya yang murah membuat plastik digunakan secara masif dalam aktivitas sehari-hari. Sayangnya, penggunaan yang tinggi ini tidak diimbangi dengan kesadaran mengelola sampah secara benar. Banyak masyarakat yang masih membuang sampah sembarangan ke sungai atau jalanan. Padahal, bahan plastik membutuhkan waktu puluhan hingga ratusan tahun untuk dapat terurai secara alami di tanah. Akibat dari penumpukan ini, saluran air tersumbat sehingga memicu banjir, pencemaran tanah, serta munculnya mikroplastik yang merusak rantai makanan makhluk hidup.
+
+                        Untuk mengatasi masalah ini, diperlukan kolaborasi aktif antara pemerintah, pihak sekolah, dan masyarakat. Langkah nyata seperti membawa botol minum sendiri (tumbler), membatasi penggunaan kantong plastik, serta membiasakan pemilahan sampah harus diterapkan secara konsisten demi menjaga kebersihan lingkungan bersama.
+                    `
+                },
+                {
+                    id: 'sosial-2',
+                    title: 'Dampak Penggunaan Media Sosial Remaja',
+                    icon: 'fa-hashtag',
+                    color: 'from-purple-600 to-pink-600',
+                    summary: 'Fenomena perubahan pola interaksi dan psikologis siswa SMP akibat media sosial.',
+                    paragraphs: `
+                        Penggunaan media sosial di kalangan remaja usia sekolah menengah pertama (SMP) telah menjadi fenomena sosial yang sangat masif di era digital saat ini. Platform seperti TikTok, Instagram, dan WhatsApp telah menggeser pola interaksi tradisional dan menjadi bagian utama dari gaya hidup remaja sehari-hari.
+
+                        Perkembangan teknologi ponsel pintar yang semakin terjangkau dan ketersediaan jaringan internet cepat menjadi pendorong utama fenomena ini. Remaja mengandalkan media sosial untuk mencari hiburan, mengekspresikan diri, dan menjaga pertemanan. Namun, penggunaan media sosial yang berlebihan tanpa pengawasan dapat menimbulkan dampak negatif. Banyak siswa mengalami penurunan waktu belajar, terganggunya pola tidur, hingga timbulnya rasa cemas akibat fenomena FOMO (Fear of Missing Out) atau takut ketinggalan tren. Selain itu, risiko terjadinya perundungan siber (cyberbullying) juga rentan menimpa siswa yang belum memiliki literasi digital yang memadai.
+
+                        Oleh karena itu, media sosial ibarat pisau bermata dua yang memerlukan kearifan dalam menggunakannya. Pihak sekolah dan orang tua perlu memberikan bimbingan literasi digital agar remaja dapat memanfaatkan media sosial secara positif untuk menambah wawasan dan karya kreatif, bukan untuk hal-hal yang merugikan.
+                    `
+                },
+                {
+                    id: 'sosial-3',
+                    title: 'Perundungan (Bullying) di Sekolah',
+                    icon: 'fa-handshake-angle',
+                    color: 'from-rose-600 to-red-700',
+                    summary: 'Penyebab dan dampak perilaku perundungan antar siswa di lingkungan sekolah.',
+                    paragraphs: `
+                        Perundungan atau bullying merupakan fenomena sosial berupa tindakan kekerasan fisik, verbal, maupun psikologis yang dilakukan secara sengaja oleh individu atau kelompok yang merasa lebih kuat terhadap orang lain yang lebih lemah. Perilaku ini masih sering ditemukan di lingkungan sekolah dan menjadi perhatian serius dunia pendidikan.
+
+                        Perilaku perundungan biasanya timbul akibat beberapa faktor pemicu, seperti kurangnya penanaman rasa empati, kurangnya perhatian di lingkungan keluarga, atau pengaruh tontonan yang mengandung unsur kekerasan. Pelaku sering kali mencari pengakuan sosial atau meluapkan rasa kekecewaan mereka dengan cara mengintimidasi teman sebaya. Akibat dari perundungan ini sangat fatal bagi korban, mulai dari penurunan prestasi akademik, hilangnya rasa percaya diri, ketakutan pergi ke sekolah, hingga trauma psikologis jangka panjang.
+
+                        Menciptakan lingkungan sekolah yang aman dan inklusif adalah kunci utama untuk menghentikan fenomena ini. Seluruh warga sekolah—termasuk guru dan siswa—harus berani bersuara menolak segala bentuk perundungan serta membudayakan sikap saling menghargai dan menyayangi antar sesama teman.
+                    `
+                }
+            ]
+        };
+
+        // ================= GLOBAL APP STATE =================
+        let state = {
+            students: [],
+            groups: [],
+            activeGroupIndex: 0,
+            textQuotas: {
+                'alam-1': 0, 'alam-2': 0, 'alam-3': 0,
+                'sosial-1': 0, 'sosial-2': 0, 'sosial-3': 0
+            },
+            selectedText: null,
+            answers: {}
+        };
+
+        // Audio Effects (Synthesized using Web Audio API for seamless experience)
+        function playSoundEffect(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'spin') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.1);
+                } else if (type === 'win') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.5);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.5);
+                }
+            } catch(e) {}
+        }
+
+        // ================= STEP SWITCHER =================
+        function setStep(stepNum) {
+            document.getElementById('section-step-1').classList.add('hidden');
+            document.getElementById('section-step-2').classList.add('hidden');
+            document.getElementById('section-step-3').classList.add('hidden');
+            document.getElementById('section-step-4').classList.add('hidden');
+
+            document.getElementById(`section-step-${stepNum}`).classList.remove('hidden');
+
+            // Header Nav styling
+            for (let i = 1; i <= 4; i++) {
+                const nav = document.getElementById(`nav-step-${i}`);
+                if (i === stepNum) {
+                    nav.className = 'px-3 py-1.5 rounded-xl bg-sky-500 text-white font-black shadow-sm';
+                } else if (i < stepNum) {
+                    nav.className = 'px-3 py-1.5 rounded-xl bg-sky-100 text-sky-800 font-bold cursor-pointer';
+                } else {
+                    nav.className = 'px-3 py-1.5 rounded-xl text-slate-400';
+                }
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================= STEP 1: PRESENSI LOGIC =================
+        const elStudentCount = document.getElementById('student-count');
+        const elAttendanceList = document.getElementById('attendance-list');
+        const elEmptyMsg = document.getElementById('empty-attendance-msg');
+        const elInputName = document.getElementById('input-student-name');
+        const elErrorMsg = document.getElementById('attendance-error');
+
+        function renderAttendance() {
+            elStudentCount.textContent = state.students.length;
+
+            if (state.students.length === 0) {
+                elEmptyMsg.classList.remove('hidden');
+                const chips = elAttendanceList.querySelectorAll('.student-chip');
+                chips.forEach(c => c.remove());
+                return;
+            }
+
+            elEmptyMsg.classList.add('hidden');
+            const existingChips = elAttendanceList.querySelectorAll('.student-chip');
+            existingChips.forEach(c => c.remove());
+
+            state.students.forEach((name, idx) => {
+                const chip = document.createElement('div');
+                chip.className = 'student-chip bg-white border border-sky-200 shadow-sm text-slate-800 rounded-xl p-2.5 flex items-center justify-between text-xs font-semibold';
+                chip.innerHTML = `
+                    <span class="truncate pr-1"><i class="fa-solid fa-user-graduate text-sky-500 mr-1.5"></i> ${idx + 1}. ${escapeHtml(name)}</span>
+                    <button onclick="removeStudent(${idx})" class="text-slate-300 hover:text-rose-500 transition" title="Hapus">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+                elAttendanceList.appendChild(chip);
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        document.getElementById('form-attendance').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = elInputName.value.trim();
+            if (!val) return;
+
+            if (state.students.length >= 32) {
+                elErrorMsg.textContent = 'Batas maksimal presensi kelas (32 siswa) telah tercapai!';
+                elErrorMsg.classList.remove('hidden');
+                return;
+            }
+
+            if (state.students.some(s => s.toLowerCase() === val.toLowerCase())) {
+                elErrorMsg.textContent = 'Nama siswa tersebut sudah ada di daftar presensi!';
+                elErrorMsg.classList.remove('hidden');
+                return;
+            }
+
+            elErrorMsg.classList.add('hidden');
+            state.students.push(val);
+            elInputName.value = '';
+            renderAttendance();
+        });
+
+        function removeStudent(idx) {
+            state.students.splice(idx, 1);
+            renderAttendance();
+        }
+
+        document.getElementById('btn-reset-attendance').addEventListener('click', () => {
+            if (confirm('Kosongkan seluruh daftar presensi siswa?')) {
+                state.students = [];
+                renderAttendance();
+            }
+        });
+
+
+        // ================= STEP 2: GACHA SHUFFLE LOGIC =================
+        document.getElementById('btn-start-gacha').addEventListener('click', () => {
+            if (state.students.length < 2) {
+                alert('Masukkan minimal 2 nama siswa terlebih dahulu untuk membentuk kelompok!');
+                return;
+            }
+            setStep(2);
+            document.getElementById('gacha-animation-box').classList.remove('hidden');
+            document.getElementById('gacha-result-box').classList.add('hidden');
+        });
+
+        document.getElementById('btn-spin-now').addEventListener('click', () => {
+            startSlotMachineGacha();
+        });
+
+        document.getElementById('btn-re-shuffle').addEventListener('click', () => {
+            document.getElementById('gacha-animation-box').classList.remove('hidden');
+            document.getElementById('gacha-result-box').classList.add('hidden');
+            startSlotMachineGacha();
+        });
+
+        function startSlotMachineGacha() {
+            const btnSpin = document.getElementById('btn-spin-now');
+            btnSpin.disabled = true;
+            btnSpin.classList.add('opacity-50');
+
+            const slotDisplay = document.getElementById('slot-name-display');
+            const progressBar = document.getElementById('gacha-progress-bar');
+            const statusText = document.getElementById('gacha-status-text');
+
+            slotDisplay.classList.add('slot-animating');
+
+            let counter = 0;
+            const totalTicks = 35; // Number of fast cycles
+            const interval = setInterval(() => {
+                counter++;
+                const randomName = state.students[Math.floor(Math.random() * state.students.length)];
+                slotDisplay.textContent = randomName;
+                playSoundEffect('spin');
+
+                progressBar.style.width = `${(counter / totalTicks) * 100}%`;
+
+                if (counter >= totalTicks) {
+                    clearInterval(interval);
+                    slotDisplay.classList.remove('slot-animating');
+                    slotDisplay.textContent = "BERHASIL DIAKAC!";
+                    statusText.textContent = "Selesai!";
+                    
+                    playSoundEffect('win');
+
+                    // Trigger Confetti
+                    try {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    } catch(e) {}
+
+                    // Process Fisher-Yates Groups
+                    processFisherYatesGroups();
+
+                    setTimeout(() => {
+                        document.getElementById('gacha-animation-box').classList.add('hidden');
+                        document.getElementById('gacha-result-box').classList.remove('hidden');
+                        btnSpin.disabled = false;
+                        btnSpin.classList.remove('opacity-50');
+                        progressBar.style.width = '0%';
+                        statusText.textContent = "Mengocok...";
+                        slotDisplay.textContent = "? ? ?";
+                    }, 1200);
+                }
+            }, 80);
+        }
+
+        function processFisherYatesGroups() {
+            // Fisher-Yates Shuffle Algorithm (Unbiased Random)
+            let array = [...state.students];
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+
+            // Chunk array into groups of 4 students
+            const chunkSize = 4;
+            state.groups = [];
+            for (let i = 0; i < array.length; i += chunkSize) {
+                state.groups.push(array.slice(i, i + chunkSize));
+            }
+
+            renderGroupResults();
+        }
+
+        function renderGroupResults() {
+            const container = document.getElementById('groups-result-grid');
+            const selectEl = document.getElementById('select-active-group');
+
+            container.innerHTML = '';
+            selectEl.innerHTML = '';
+
+            state.groups.forEach((grp, idx) => {
+                const groupName = `Kelompok ${idx + 1}`;
+
+                // Card Element
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl border-2 border-sky-100 p-5 space-y-3 shadow-sm hover:shadow-md transition';
+
+                const membersList = grp.map(m => `
+                    <li class="bg-slate-50 p-2 rounded-xl text-xs font-semibold text-slate-700 border border-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-user text-sky-500"></i> ${escapeHtml(m)}
+                    </li>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <h4 class="heading-font text-lg text-sky-900 font-bold">${groupName}</h4>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">${grp.length} Siswa</span>
+                    </div>
+                    <ul class="space-y-1.5">
+                        ${membersList}
+                    </ul>
+                `;
+                container.appendChild(card);
+
+                // Option Dropdown
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `${groupName} (${grp.join(', ')})`;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        document.getElementById('btn-go-to-texts').addEventListener('click', () => {
+            state.activeGroupIndex = parseInt(document.getElementById('select-active-group').value, 10) || 0;
+            updateStep3Info();
+            setStep(3);
+        });
+
+        document.getElementById('btn-back-step2').addEventListener('click', () => {
+            setStep(2);
+        });
+
+        // ================= STEP 3: TEKS BER-KUOTA LOGIC =================
+        function updateStep3Info() {
+            const grp = state.groups[state.activeGroupIndex] || [];
+            document.getElementById('active-group-label').textContent = `Kelompok ${state.activeGroupIndex + 1}`;
+            document.getElementById('active-group-members-label').textContent = grp.join(', ');
+            renderTextCards();
+        }
+
+        function renderTextCards() {
+            const gridAlam = document.getElementById('grid-texts-alam');
+            const gridSosial = document.getElementById('grid-texts-sosial');
+
+            gridAlam.innerHTML = '';
+            gridSosial.innerHTML = '';
+
+            TEXT_DATABASE.alam.forEach(text => {
+                gridAlam.appendChild(createTextCard(text, 'alam'));
+            });
+
+            TEXT_DATABASE.sosial.forEach(text => {
+                gridSosial.appendChild(createTextCard(text, 'sosial'));
+            });
+        }
+
+        function createTextCard(text, category) {
+            const quota = state.textQuotas[text.id] || 0;
+            const isFull = quota >= 2;
+
+            const card = document.createElement('div');
+            card.className = `bg-white rounded-3xl border ${isFull ? 'border-slate-200 opacity-60' : 'border-sky-100 hover:border-sky-300'} p-6 flex flex-col justify-between shadow-sm space-y-4 relative overflow-hidden transition`;
+
+            card.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${text.color} text-white flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid ${text.icon}"></i>
+                        </div>
+                        <span class="text-[10px] font-extrabold px-3 py-1 rounded-full ${isFull ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-800'}">
+                            Kuota: ${quota}/2 Kelompok
+                        </span>
+                    </div>
+                    <h4 class="heading-font text-xl text-slate-900">${text.title}</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">${text.summary}</p>
+                </div>
+
+                <button onclick="selectTextTopic('${category}', '${text.id}')" ${isFull ? 'disabled' : ''} 
+                    class="w-full py-3 ${isFull ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-sky-500 hover:bg-sky-600 text-white shadow-md shadow-sky-500/20'} font-bold text-xs rounded-2xl transition flex items-center justify-center gap-2">
+                    ${isFull ? '<i class="fa-solid fa-lock"></i> Kuota Penuh' : 'Pilih Teks Ini <i class="fa-solid fa-arrow-right"></i>'}
+                </button>
+            `;
+            return card;
+        }
+
+        // Category Tabs
+        document.getElementById('tab-cat-alam').addEventListener('click', () => {
+            document.getElementById('tab-cat-alam').className = 'px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition bg-sky-500 text-white shadow-sm flex items-center gap-2';
+            document.getElementById('tab-cat-sosial').className = 'px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
+            document.getElementById('grid-texts-alam').classList.remove('hidden');
+            document.getElementById('grid-texts-sosial').classList.add('hidden');
+        });
+
+        document.getElementById('tab-cat-sosial').addEventListener('click', () => {
+            document.getElementById('tab-cat-sosial').className = 'px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition bg-sky-500 text-white shadow-sm flex items-center gap-2';
+            document.getElementById('tab-cat-alam').className = 'px-6 py-2.5 rounded-xl text-xs md:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
+            document.getElementById('grid-texts-sosial').classList.remove('hidden');
+            document.getElementById('grid-texts-alam').classList.add('hidden');
+        });
+
+        function selectTextTopic(category, id) {
+            if (state.textQuotas[id] >= 2) {
+                alert('Kuota untuk teks ini sudah penuh (maksimal 2 kelompok)! Silakan pilih teks lain.');
+                return;
+            }
+
+            // Deduct previous selection quota if any
+            if (state.selectedText) {
+                state.textQuotas[state.selectedText.id] = Math.max(0, state.textQuotas[state.selectedText.id] - 1);
+            }
+
+            state.selectedText = TEXT_DATABASE[category].find(t => t.id === id);
+            state.textQuotas[id] += 1;
+
+            // Load into Step 4
+            document.getElementById('lkpd-text-title').textContent = state.selectedText.title;
+            document.getElementById('lkpd-group-name').textContent = `Kelompok ${state.activeGroupIndex + 1}`;
+            document.getElementById('lkpd-text-category').textContent = category === 'alam' ? 'Fenomena Alam' : 'Fenomena Sosial';
+
+            // Format Paragraf Utuh Biasa
+            const cleanParagraphsHtml = state.selectedText.paragraphs.trim().split('\n\n').map(p => `<p class="leading-relaxed mb-3">${p.trim()}</p>`).join('');
+            document.getElementById('lkpd-text-content').innerHTML = cleanParagraphsHtml;
+
+            renderTextCards();
+            setStep(4);
+        }
+
+        document.getElementById('btn-back-step3').addEventListener('click', () => {
+            setStep(3);
+        });
+
+
+        // ================= STEP 4: LKPD SUBMIT & EXPORT PDF LOGIC =================
+        document.getElementById('form-lkpd').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            state.answers = {
+                q1: document.getElementById('ans-struct1-quote').value,
+                r1: document.getElementById('ans-struct1-reason').value,
+                q2: document.getElementById('ans-struct2-quote').value,
+                r2: document.getElementById('ans-struct2-reason').value,
+                q3: document.getElementById('ans-struct3-quote').value,
+                r3: document.getElementById('ans-struct3-reason').value,
+
+                info1: document.getElementById('ans-info-1').value,
+                info2: document.getElementById('ans-info-2').value,
+                info3: document.getElementById('ans-info-3').value,
+                info4: document.getElementById('ans-info-4').value,
+            };
+
+            // Populate PDF Modal
+            const activeGroupMembers = state.groups[state.activeGroupIndex] || [];
+            document.getElementById('pdf-out-group').textContent = `Kelompok ${state.activeGroupIndex + 1}`;
+            document.getElementById('pdf-out-title').textContent = state.selectedText ? state.selectedText.title : '';
+            document.getElementById('pdf-out-members').textContent = activeGroupMembers.join(', ');
+
+            document.getElementById('pdf-out-q1').textContent = state.answers.q1;
+            document.getElementById('pdf-out-r1').textContent = state.answers.r1;
+            document.getElementById('pdf-out-q2').textContent = state.answers.q2;
+            document.getElementById('pdf-out-r2').textContent = state.answers.r2;
+            document.getElementById('pdf-out-q3').textContent = state.answers.q3;
+            document.getElementById('pdf-out-r3').textContent = state.answers.r3;
+
+            document.getElementById('pdf-out-info1').textContent = state.answers.info1;
+            document.getElementById('pdf-out-info2').textContent = state.answers.info2;
+            document.getElementById('pdf-out-info3').textContent = state.answers.info3;
+            document.getElementById('pdf-out-info4').textContent = state.answers.info4;
+
+            document.getElementById('modal-pdf-preview').classList.remove('hidden');
+        });
+
+        document.getElementById('btn-close-pdf-modal').addEventListener('click', () => {
+            document.getElementById('modal-pdf-preview').classList.add('hidden');
+        });
+
+        // Download PDF Trigger
+        document.getElementById('btn-download-pdf-now').addEventListener('click', () => {
+            const element = document.getElementById('pdf-printable-sheet');
+            const opt = {
+                margin:       0.4,
+                filename:     `LKPD_Kelas9_Kelompok_${state.activeGroupIndex + 1}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+
+
+        // ================= INITIAL LOAD =================
+        window.onload = function() {
+            renderAttendance();
+            renderTextCards();
+            setStep(1);
+        };
+    </script>
+</body>
+</html>
