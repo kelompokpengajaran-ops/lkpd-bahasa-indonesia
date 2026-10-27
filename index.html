@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LKPD Race Teks Eksplanasi Fenomena Alam - Kelas 9</title>
+    <title>Lembar Kerja LKPD Teks Eksplanasi - Kelas 9</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome & Fonts -->
@@ -18,12 +18,29 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); }
+        
+        /* CSS KHUSUS SAAT DICETAK KE PDF AGAR MIRIP LEMBAR KERJA RESMI */
+        .pdf-mode {
+            background: #ffffff !important;
+            color: #000000 !important;
+            padding: 10px !important;
+        }
+        .pdf-mode textarea {
+            border: 1px solid #333 !important;
+            background: #fdfdfd !important;
+            color: #000 !important;
+            resize: none;
+            padding: 8px !important;
+        }
+        .pdf-mode .no-pdf {
+            display: none !important;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen pb-12">
 
     <!-- Header / Navbar -->
-    <header class="gradient-bg text-white sticky top-0 z-50 shadow-md">
+    <header class="gradient-bg text-white sticky top-0 z-50 shadow-md no-pdf">
         <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="bg-white/20 p-2 rounded-xl text-white backdrop-blur">
@@ -52,7 +69,7 @@
                     <i class="fa-solid fa-bolt-lightning text-3xl"></i>
                 </div>
                 <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Tantangan Balap Analisis Teks</h2>
-                <p class="text-slate-500 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak dan mulai perlombaan!</p>
+                <p class="text-slate-500 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak (tersedia 8 variasi teks untuk 32 siswa) dan mulai perlombaan!</p>
 
                 <div class="space-y-4 text-left">
                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Nama Lengkap Siswa</label>
@@ -68,111 +85,94 @@
             </div>
         </section>
 
-        <!-- LANGKAH 2: TAMPILAN LOMBA & PENGERJAAN TEKS -->
-        <section id="step2" class="hidden space-y-6">
+        <!-- LANGKAH 2: TAMPILAN LEMBAR KERJA LKPD -->
+        <section id="step2" class="hidden space-y-6 bg-white p-6 md:p-8 rounded-2xl border border-slate-200 card-shadow">
 
-            <!-- Card Informasi Siswa & Teks -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 card-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Peserta:</span>
-                        <span id="displayName" class="text-blue-600 font-bold"></span>
-                    </div>
-                    <h3 id="textTitle" class="text-lg md:text-xl font-extrabold text-slate-900 mt-0.5"></h3>
-                    <span class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">Topik: Fenomena Alam</span>
-                </div>
-                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-800 w-full md:w-auto">
-                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-amber-600"></i> Status Lomba:</p>
-                    <p class="text-amber-700 mt-0.5">Kerjakan dengan teliti dan cepat!</p>
-                </div>
+            <!-- KOP LEMBAR KERJA -->
+            <div class="text-center border-b-2 border-slate-800 pb-4 mb-4">
+                <h2 class="text-xl md:text-2xl font-extrabold uppercase tracking-wide text-slate-900">LEMBAR KERJA PESERTA DIDIK (LKPD)</h2>
+                <p class="text-sm font-bold text-slate-700 mt-1">ANALISIS STRUKTUR & ISI TEKS EKSPLANASI</p>
+                <p class="text-xs text-slate-500">Mata Pelajaran: Bahasa Indonesia Kelas IX SMP</p>
             </div>
 
-            <!-- Bacaan Teks Paragraf Utuh -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow">
-                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open text-blue-600"></i> Bacaan Teks Eksplanasi (Paragraf Utuh)
+            <!-- Identitas Siswa -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm">
+                <div><span class="font-bold text-slate-600">Nama Peserta:</span> <span id="displayName" class="font-extrabold text-blue-700"></span></div>
+                <div><span class="font-bold text-slate-600">Waktu Pengerjaan:</span> <span id="displayTime" class="font-mono font-bold text-slate-800">00:00</span></div>
+                <div class="md:col-span-2"><span class="font-bold text-slate-600">Judul Teks Bacaan:</span> <span id="textTitle" class="font-extrabold text-slate-900"></span></div>
+            </div>
+
+            <!-- Bacaan Teks (4 Paragraf) -->
+            <div class="border border-slate-300 rounded-xl p-5 bg-white">
+                <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-blue-600"></i> Teks Bacaan Eksplanasi
                 </h4>
-                <div id="textContent" class="text-slate-700 leading-relaxed space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200 text-justify text-sm md:text-base">
+                <div id="textContent" class="text-slate-800 leading-relaxed space-y-3 text-justify text-xs md:text-sm">
                     <!-- Teks dimuat dinamis -->
                 </div>
             </div>
 
-            <!-- Form Tugas Analisis (Mengerjakan di Web) -->
-            <div id="lkpdContainer" class="space-y-6">
+            <!-- Form Tugas Analisis -->
+            <div id="lkpdContainer" class="space-y-6 pt-2">
 
-                <!-- TUGAS 1: ANALISIS STRUKTUR & ALASAN -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow space-y-6">
-                    <div class="border-b border-slate-100 pb-3">
-                        <h4 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-blue-600"></i> Tugas 1: Analisis Struktur Teks Eksplanasi
-                        </h4>
-                        <p class="text-xs text-slate-500 mt-1">Kutiplah kalimat dari teks, lalu jelaskan alasan mengapa kutipan tersebut termasuk ke dalam struktur bagian tersebut berdasarkan cirinya.</p>
-                    </div>
+                <!-- TUGAS 1 -->
+                <div class="border border-slate-300 rounded-xl p-5 space-y-4">
+                    <h4 class="text-sm font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                        TUGAS 1: Analisis Struktur Teks Eksplanasi
+                    </h4>
 
                     <!-- 1. Identifikasi Fenomena -->
-                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <label class="block font-bold text-slate-800 text-xs md:text-sm">1. Bagian: Identifikasi Fenomena (Pernyataan Umum)</label>
-                        <textarea id="struct1_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
-                        <textarea id="struct1_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Identifikasi Fenomena? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
+                    <div class="space-y-1.5">
+                        <label class="block font-bold text-slate-800 text-xs">1. Bagian: Identifikasi Fenomena (Pernyataan Umum)</label>
+                        <textarea id="struct1_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct1_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Identifikasi Fenomena..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
                     </div>
 
-                    <!-- 2. Urutan Sebab-Akibat -->
-                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <label class="block font-bold text-slate-800 text-xs md:text-sm">2. Bagian: Urutan Sebab-Akibat (Deretan Penjelas)</label>
-                        <textarea id="struct2_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
-                        <textarea id="struct2_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Urutan Sebab-Akibat? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
+                    <!-- 2. Urutan Sebab Akibat -->
+                    <div class="space-y-1.5">
+                        <label class="block font-bold text-slate-800 text-xs">2. Bagian: Urutan Sebab-Akibat (Deretan Penjelas)</label>
+                        <textarea id="struct2_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct2_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Urutan Sebab-Akibat..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
                     </div>
 
                     <!-- 3. Ulasan -->
-                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <label class="block font-bold text-slate-800 text-xs md:text-sm">3. Bagian: Ulasan (Interpretasi / Penutup)</label>
-                        <textarea id="struct3_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
-                        <textarea id="struct3_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Ulasan? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
+                    <div class="space-y-1.5">
+                        <label class="block font-bold text-slate-800 text-xs">3. Bagian: Ulasan (Interpretasi / Penutup)</label>
+                        <textarea id="struct3_quote" rows="2" placeholder="Tuliskan kutipan kalimat dari teks..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
+                        <textarea id="struct3_reason" rows="2" placeholder="Alasan mengapa bagian ini disebut Ulasan..." class="w-full text-xs rounded-lg border border-slate-300 p-2.5"></textarea>
                     </div>
                 </div>
 
-                <!-- TUGAS 2: PEMAHAMAN INFORMASI ISI TEKS -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow space-y-4">
-                    <div class="border-b border-slate-100 pb-3">
-                        <h4 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-question text-blue-600"></i> Tugas 2: Pemahaman Informasi Isi Teks
-                        </h4>
-                        <p class="text-xs text-slate-500 mt-1">Jawablah pertanyaan berdasarkan isi teks fenomena alam yang kamu baca.</p>
-                    </div>
-
-                    <div class="space-y-4">
+                <!-- TUGAS 2 -->
+                <div class="border border-slate-300 rounded-xl p-5 space-y-4">
+                    <h4 class="text-sm font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+                        TUGAS 2: Pemahaman Informasi Isi Teks
+                    </h4>
+                    <div class="space-y-3 text-xs">
                         <div>
-                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">1. Peristiwa apa yang dibahas dalam teks tersebut, dan bagaimana proses awal terjadinya?</label>
-                            <textarea id="q1" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block font-bold text-slate-800 mb-1">1. Peristiwa apa yang dibahas dan bagaimana proses awal terjadinya?</label>
+                            <textarea id="q1" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">2. Apa saja faktor atau penyebab utama yang memicu terjadinya fenomena alam tersebut?</label>
-                            <textarea id="q2" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block font-bold text-slate-800 mb-1">2. Apa saja faktor atau penyebab utama fenomena tersebut?</label>
+                            <textarea id="q2" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">3. Apa pelajaran, kesimpulan, atau dampak penting dari fenomena tersebut bagi kehidupan manusia?</label>
-                            <textarea id="q3" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block font-bold text-slate-800 mb-1">3. Apa pelajaran atau dampak penting dari fenomena tersebut bagi manusia?</label>
+                            <textarea id="q3" rows="2" placeholder="Tulis jawaban..." class="w-full rounded-lg border border-slate-300 p-2"></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- TOMBOL AKSI SELESAI -->
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button onclick="copyAnswers()" 
-                        class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center space-x-2 text-sm md:text-base">
+                <!-- TOMBOL AKSI -->
+                <div id="actionButtons" class="flex flex-col sm:flex-row gap-3 pt-4 no-pdf">
+                    <button onclick="copyAnswers()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2 text-sm">
                         <i class="fa-solid fa-copy"></i>
-                        <span>Salin Jawaban untuk WhatsApp</span>
+                        <span>Salin untuk WhatsApp</span>
                     </button>
-                    <button onclick="downloadPDF()" 
-                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center space-x-2 text-sm md:text-base">
-                        <i class="fa-solid fa-file-pdf text-red-600"></i>
-                        <span>Unduh PDF Rapi</span>
+                    <button onclick="downloadPDF()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Cetak Lembar LKPD (PDF)</span>
                     </button>
                 </div>
             </div>
@@ -181,18 +181,79 @@
     </main>
 
     <script>
+        // 8 PILIHAN TEKS FENOMENA ALAM (MASING-MASING 4 PARAGRAF) UNTUK 32 SISWA
         const naturalTexts = [
             {
-                title: "Proses Terjadinya Pelangi",
-                content: "Pelangi merupakan salah satu fenomena alam yang sangat mempesona dan kerap muncul setelah hujan reda. Keindahan warna-warni melingkar di langit ini sebenarnya terbentuk melalui proses pembiasan cahaya matahari. Ketika sinar matahari menembus butir-butir air hujan yang masih melayang di udara, cahaya tersebut dibelokkan atau dibiaskan dari medium udara ke medium air. Selain dibiaskan, cahaya putih matahari juga mengalami penguraian warna atau dispersi. Spektrum warna asli matahari yang tampak putih ternyata terurai menjadi berbagai warna komponen, yaitu merah, jingga, kuning, hijau, biru, indigo, dan ungu. Masing-masing warna memiliki panjang gelombang yang berbeda, sehingga sudut pembiasannya pun berbeda-beda pula dan menghasilkan garis lengkung indah di langit. Fenomena pelangi membuktikan betapa hukum fisika optik bekerja secara alami di alam bebas. Kehadiran pelangi selalu memberikan rasa kagum bagi siapapun yang melihatnya sekaligus menjadi pengingat keindahan siklus hidrologi di bumi."
+                title: "1. Proses Terjadinya Pelangi",
+                content: [
+                    "Pelangi merupakan salah satu fenomena alam optik dan meteorologi yang sangat mempesona serta kerap muncul di langit setelah hujan reda. Keindahan warna-warni melingkar yang menghiasi cakrawala ini tidak terjadi begitu saja, melainkan melalui proses ilmiah pembiasan dan penguraian cahaya matahari secara alami.",
+                    "Proses kemunculan pelangi bermula ketika butir-butir air hujan yang masih melayang di atmosfer bertindak sebagai prisma optik alami. Ketika sinar matahari putih menembus butiran air tersebut, kecepatan cahaya melambat dan dibelokkan atau dibiaskan dari medium udara ke medium air dengan sudut bias yang berbeda-beda.",
+                    "Selain dibiaskan, cahaya matahari juga mengalami penguraian warna atau dispersi di dalam butiran air hujan. Spektrum warna putih matahari terurai menjadi komponen warna kasat mata yang terdiri dari merah, jingga, kuning, hijau, biru, indigo, dan ungu. Setiap warna memiliki panjang gelombang unik yang menentukan tingkat kemiringan lengkungannya di langit.",
+                    "Kehadiran pelangi di alam bebas tidak hanya memberikan suguhan visual yang mengagumkan bagi siapa pun yang menyaksikannya, tetapi juga menjadi bukti nyata bagaimana siklus hidrologi dan hukum fisika optik bekerja secara harmonis di bumi kita tercinta."
+                ]
             },
             {
-                title: "Proses Terjadinya Gempa Bumi",
-                content: "Gempa bumi adalah getaran atau pergerakan guncangan yang terjadi di permukaan bumi akibat lepasan energi dari bawah tanah secara tiba-tiba. Peristiwa alam ini umumnya disebabkan oleh pergerakan lempeng tektonik di kerak bumi. Bumi kita terdiri dari beberapa lapisan lempeng batuan yang senantiasa bergerak secara konstan dengan kecepatan tertentu. Ketika dua lempeng saling bergesekan, bertubrukan, atau saling menjauh, tekanan yang sangat besar menumpuk di sepanjang garis patahan. Pada suatu titik, batuan tersebut tidak lagi mampu menahan tekanan akumulasi energi, sehingga terjadi patahan atau pelepasan energi secara mendadak. Pelepasan energi ini memancar ke segala arah dalam bentuk gelombang seismik yang merambat hingga ke permukaan bumi, menyebabkan tanah berguncang hebat. Gempa bumi dapat terjadi kapan saja tanpa mengenal waktu dan sering kali menimbulkan dampak kerusakan yang masif tergantung pada kekuatan magnitudonya. Oleh karena itu, pemahaman mitigasi bencana gempa sangat penting bagi masyarakat yang tinggal di wilayah rawan gempa."
+                title: "2. Proses Terjadinya Gempa Bumi",
+                content: [
+                    "Gempa bumi adalah peristiwa getaran, guncangan, atau gerakan bergelombang yang terjadi di permukaan bumi akibat pelepasan energi secara tiba-tiba dari dalam lapisan kerak bumi. Fenomena alam ini termasuk salah satu bencana yang paling sering diamati dan dipelajari dalam ilmu geofisika modern.",
+                    "Secara umum, penyebab utama terjadinya gempa bumi adalah pergerakan lempeng tektonik yang menyusun lapisan litosfer bumi. Lempeng-lempeng raksasa ini senantiasa bergerak secara konstan dan lambat di atas lapisan mantel bumi yang bersifat cair liat, dengan kecepatan beberapa sentimeter per tahunnya.",
+                    "Ketika dua lempeng tektonik saling bertumbukan, bergesekan, atau saling menjauh, terjadi penumpukan tekanan dan akumulasi energi yang sangat besar di sepanjang garis batas patahan atau zona subduksi. Pada titik jenuh tertentu, batuan kerak bumi tidak lagi sanggup menahan beban tekanan tersebut, sehingga terjadi patahan mendadak yang memuntahkan energi dalam bentuk gelombang seismik.",
+                    "Gelombang seismik inilah yang merambat ke segala arah hingga mencapai permukaan bumi dan menyebabkan guncangan hebat pada bangunan serta tanah. Oleh karena itu, pemahaman mendalam mengenai mitigasi bencana gempa sangat krusial bagi keselamatan masyarakat di zona rawan."
+                ]
             },
             {
-                title: "Proses Terjadinya Hujan Es",
-                content: "Hujan es atau yang dalam ilmu meteorologi dikenal sebagai fenomena hail merupakan salah satu bentuk presipitasi berupa bola-bola es yang turun ke bumi. Fenomena ekstrem ini biasanya terjadi pada masa peralihan musim (pancaroba) dan didahului oleh cuaca panas terik sejak pagi hari. Proses terjadinya hujan es berawal dari pertumbuhan awan Cumulonimbus yang menjulang tinggi secara vertikal di atmosfer akibat pemanasan matahari yang kuat. Di dalam awan cumulonimbus yang sangat tinggi dan dingin tersebut, terdapat arus udara naik yang sangat kuat (strong updraft). Arus udara naik ini membawa butir-butir air hujan ke bagian atas awan yang bersuhu di bawah titik beku, sehingga air tersebut langsung membeku menjadi butiran es. Butiran es yang terbentuk kemudian jatuh karena gravitasi, namun terangkat kembali ke atas oleh arus udara panas, menumpuk lapisan es berulang-ulang hingga ukurannya semakin besar dan berat. Ketika arus udara naik tidak lagi mampu menahan berat butiran es tersebut, es akan meluncur deras jatuh ke bumi sebagai hujan es lebat yang sering kali disertai angin kencang dan petir."
+                title: "3. Proses Terjadinya Hujan Es",
+                content: [
+                    "Hujan es atau yang dalam dunia meteorologi sering disebut sebagai fenomena hail merupakan bentuk presipitasi unik berupa gumpalan atau bola-bola es yang jatuh meluncur ke permukaan bumi. Fenomena cuaca ekstrem ini umumnya sering terjadi pada masa pancaroba atau peralihan musim hujan ke musim kemarau.",
+                    "Proses terbentuknya hujan es diawali dengan pemanasan matahari yang sangat terik sejak pagi hari di permukaan bumi, yang kemudian memicu pembentukan awan cumulonimbus menjulang tinggi secara vertikal di atmosfer. Di dalam awan badai yang sangat dingin tersebut, terdapat arus udara naik vertikal yang kekuatannya sangat besar atau biasa disebut strong updraft.",
+                    "Arus udara naik yang kuat ini menghisap butir-butir air hujan menuju puncak awan yang suhunya berada di bawah titik beku, mengakibatkan air tersebut membeku menjadi butiran-butiran es padat. Karena gaya berat gravitasi, butiran es tersebut mulai jatuh ke bawah, namun terdorong naik kembali ke puncak awan oleh arus udara panas berulang kali, sehingga lapisan esnya semakin menumpuk dan bertambah besar.",
+                    "Ketika berat butiran es sudah melampaui kekuatan arus udara naik di dalam awan, butiran es raksasa tersebut akhirnya meluncur deras ke bumi sebagai hujan es lebat yang biasanya disertai hembusan angin kencang serta sambaran petir menyilaukan."
+                ]
+            },
+            {
+                title: "4. Proses Terjadinya Tsunami",
+                content: [
+                    "Tsunami adalah serangkaian gelombang laut raksasa yang timbul akibat perindahan volume air secara masif di dalam badan laut, umumnya terjadi karena gempa bumi bawah laut. Nama tsunami sendiri berasal dari bahasa Jepang yang berarti ombak besar di pelabuhan.",
+                    "Penyebab utama dari gelombang dahsyat ini adalah aktivitas tektonik bawah laut seperti gempa bumi vulkanik, longsor bawah laut, atau letusan gunung berapi maritim. Ketika dasar laut mengalami deformasi vertikal secara tiba-tiba akibat patahan lempeng, air laut di atasnya terdorong ke atas dan menciptakan gelombang dengan energi raksasa.",
+                    "Di tengah lautan lepas, gelombang tsunami bergerak dengan kecepatan ratusan kilometer per jam namun dengan ketinggian yang sangat rendah sehingga sering kali tidak terasa oleh kapal yang berlayar. Akan tetapi, ketika gelombang tersebut mendekati wilayah perairan dangkal pantai, kecepatan rambatnya melambat drastis sementara tinggi gelombangnya melonjak naik secara drastis hingga mencapai puluhan meter.",
+                    "Dampak kerusakan yang ditimbulkan oleh terjangan tsunami sangatlah masif dan destruktif bagi wilayah pesisir pantai. Oleh sebab itu, pemasangan sistem peringatan dini tsunami serta edukasi jalur evakuasi menjadi langkah penyelamatan jiwa yang sangat vital."
+                ]
+            },
+            {
+                title: "5. Proses Terjadinya Aurora",
+                content: [
+                    "Aurora merupakan fenomena alam pancaran cahaya terang menyala-vivid yang menari-nari indah di langit malam pada daerah lintang tinggi kutub bumi, baik di belahan bumi utara maupun selatan. Pemandangan spektakuler ini sering dijuluki sebagai salah satu keajaiban visual paling menakjubkan di muka bumi.",
+                    "Terjadinya aurora bermula dari aktivitas pelepasan partikel bermuatan listrik, seperti elektron dan proton, dari matahari melalui angin surya atau solar wind ke ruang angkasa. Partikel-partikel berenergi tinggi ini meluncur deras menembus tata surya hingga akhirnya tertarik oleh medan magnet gravitasi kutub bumi.",
+                    "Setibanya di lapisan atas atmosfer bumi (ionosfer), partikel-partikel matahari tersebut bertumbukan langsung dengan molekul gas nitrogen dan oksigen. Tumbukan partikel berkecepatan tinggi ini memicu eksitasi atom gas yang kemudian memancarkan energi cahaya berpendar warna-warni seperti hijau, merah, ungu, dan merah muda.",
+                    "Meskipun tampak sangat memesona dari permukaan bumi, keberadaan aurora juga mencerminkan interaksi dinamis yang kompleks antara pelindung medan magnet bumi dengan radiasi kosmik matahari yang berpotensi berbahaya bagi satelit."
+                ]
+            },
+            {
+                title: "6. Proses Terjadinya Angin Puting Beliung",
+                content: [
+                    "Angin puting beliung adalah fenomena pergerakan angin kencang berputar sangat kencang dengan kecepatan tinggi yang berbentuk corong menyerupai belalai gajah. Angin ribut ini bergerak secara destruktif merusak apa saja yang dilewatinya dalam durasi waktu yang relatif singkat.",
+                    "Fenomena cuaca ekstrem ini umumnya terbentuk pada siang atau sore hari saat musim pancaroba dari awan Cumulonimbus yang menjulang pekat. Perbedaan suhu udara yang mencolok antara lapisan bawah yang panas dan lapisan atas yang dingin menciptakan ketidakstabilan atmosfer yang memicu pusaran udara kuat.",
+                    "Pusaran angin berkecepatan tinggi ini tersedot ke bawah menyentuh permukaan tanah akibat adanya perbedaan tekanan udara yang ekstrem antara pusat badai dengan lingkungan sekitarnya. Kekuatan putarannya mampu menerbangkan atap rumah, merobohkan pohon besar, dan menimbulkan kepanikan warga.",
+                    "Meskipun wilayah terdampak puting beliung biasanya tidak terlalu luas, sifat destruktifnya menuntut kewaspadaan tinggi dari masyarakat, terutama saat melihat awan hitam gelap bergulung rendah di langit."
+                ]
+            },
+            {
+                title: "7. Proses Terjadinya Gerhana Matahari",
+                content: [
+                    "Gerhana matahari adalah peristiwa astronomis langka ketika posisi bulan terletak tepat di antara garis lurus antara bumi dan matahari, sehingga cahaya matahari terhalang sebagian atau seluruhnya. Peristiwa ini selalu memukau para ilmuwan dan masyarakat umum yang menyaksikannya.",
+                    "Proses terjadinya gerhana matahari bergantung sepenuhnya pada pergerakan orbit rotasi bulan mengelilingi bumi dan bumi mengelilingi matahari. Pada fase tertentu, bayangan gelap bulan (umbra dan penumbra) jatuh menimpa permukaan bumi di jalur lintasan tertentu.",
+                    "Ketika bayangan inti bulan menutupi piringan matahari secara sempurna, terjadilah gerhana matahari total di mana siang hari mendadak menjadi gelap gulita seperti malam hari dan korona matahari terlihat jelas. Sementara itu, wilayah di sekitarnya hanya mengalami gerhana matahari sebagian.",
+                    "Kehadiran gerhana matahari tidak hanya memperkaya pemahaman manusia mengenai mekanika tata surya, tetapi juga mengingatkan kita akan keteraturan hukum alam semesta yang maha luas."
+                ]
+            },
+            {
+                title: "8. Proses Terjadinya Tanah Longsor",
+                content: [
+                    "Tanah longsor merupakan bencana geologi berupa pergerakan massa tanah atau batuan menuruni lereng bukit atau tebing akibat terganggunya kestabilan lereng tersebut. Peristiwa ini sering terjadi di daerah pegunungan atau perbukitan curam ketika musim penghujan tiba.",
+                    "Penyebab utama dari terjadinya longsor adalah kombinasi antara kemiringan lereng yang curam dengan tingginya curah hujan yang mengguyur secara terus-menerus. Air hujan yang meresap ke dalam pori-pori tanah akan menambah berat massa tanah sekaligus mengurangi kekuatan gesekan antarbutiran tanah di dalam lereng.",
+                    "Selain faktor air hujan, minimnya tutupan vegetasi atau pohon berakar kuat di atas lereng serta aktivitas pemotongan tebing yang tidak berwawasan lingkungan turut mempercepat terjadinya erosi dan keruntuhan struktur tanah. Ketika batas jenuh ketahanan lereng terlampaui, gaya gravitasi bumi menarik seluruh material longsor meluncur ke bawah dengan cepat.",
+                    "Mitigasi bencana tanah longsor seperti penanaman pohon penahan air, pembuatan terasering, dan menghindari pembangunan di zona rawan sangat penting untuk meminimalisasi korban jiwa dan kerugian harta benda."
+                ]
             }
         ];
 
@@ -207,12 +268,20 @@
                 return;
             }
 
+            // Memilih 1 dari 8 teks secara acak untuk 32 siswa
             const randomIndex = Math.floor(Math.random() * naturalTexts.length);
             selectedText = naturalTexts[randomIndex];
 
             document.getElementById('displayName').innerText = nameInput;
             document.getElementById('textTitle').innerText = selectedText.title;
-            document.getElementById('textContent').innerText = selectedText.content;
+            
+            const textContainer = document.getElementById('textContent');
+            textContainer.innerHTML = '';
+            selectedText.content.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.innerText = paragraph;
+                textContainer.appendChild(p);
+            });
 
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
@@ -229,7 +298,9 @@
             const diffSec = Math.floor((now - startTime) / 1000);
             const minutes = String(Math.floor(diffSec / 60)).padStart(2, '0');
             const seconds = String(diffSec % 60).padStart(2, '0');
-            document.getElementById('timerText').innerText = `${minutes}:${seconds}`;
+            const timeStr = `${minutes}:${seconds}`;
+            document.getElementById('timerText').innerText = timeStr;
+            document.getElementById('displayTime').innerText = timeStr;
         }
 
         function getFormData() {
@@ -275,7 +346,7 @@ Waktu: ${data.time}
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert('Berhasil! Jawaban sudah disalin ke memori HP. Silakan tempel (paste) ke WhatsApp Guru.');
             }).catch(err => {
-                alert('Gagal menyalin, silakan gunakan fitur Unduh PDF Rapi saja.');
+                alert('Gagal menyalin, silakan gunakan fitur Cetak LKPD PDF saja.');
             });
             
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
@@ -283,13 +354,10 @@ Waktu: ${data.time}
 
         function downloadPDF() {
             const element = document.getElementById('step2');
-            
-            // Sembunyikan tombol aksi saat PDF dibuat
-            const actionButtons = element.querySelector('#lkpdContainer > div:last-child');
-            if (actionButtons) actionButtons.style.display = 'none';
+            element.classList.add('pdf-mode');
 
             const opt = {
-                margin:       [0.4, 0.4, 0.4, 0.4],
+                margin:       [0.3, 0.3, 0.3, 0.3],
                 filename:     `LKPD_${document.getElementById('displayName').innerText.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
@@ -297,7 +365,7 @@ Waktu: ${data.time}
             };
 
             html2pdf().from(element).set(opt).save().then(() => {
-                if (actionButtons) actionButtons.style.display = 'flex';
+                element.classList.remove('pdf-mode');
             });
         }
     </script>
