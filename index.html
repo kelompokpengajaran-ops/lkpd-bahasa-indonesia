@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Canvas Confetti -->
@@ -16,51 +16,51 @@
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); }
-        .card-glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.2); }
-        .timer-glow { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
+        .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-12">
 
     <!-- Header / Navbar -->
-    <header class="gradient-bg border-b border-blue-900/50 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+    <header class="gradient-bg text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 p-2 rounded-xl text-white">
+                <div class="bg-white/20 p-2 rounded-xl text-white backdrop-blur">
                     <i class="fa-solid font-bold fa-globe text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-base md:text-xl text-white tracking-wide">LKPD RACE: FENOMENA ALAM</h1>
-                    <p class="text-xs text-blue-300">Bahasa Indonesia Kelas 9 SMP</p>
+                    <h1 class="font-extrabold text-base md:text-lg tracking-wide">LKPD RACE: FENOMENA ALAM</h1>
+                    <p class="text-xs text-blue-100">Bahasa Indonesia Kelas 9 SMP</p>
                 </div>
             </div>
             
             <!-- Timer Live -->
-            <div id="timerContainer" class="hidden bg-slate-800 border border-yellow-500/50 timer-glow px-4 py-1.5 rounded-full flex items-center space-x-2">
-                <i class="fa-solid fa-stopwatch text-yellow-400 animate-pulse"></i>
-                <span id="timerText" class="font-mono text-base md:text-lg font-bold text-yellow-400">00:00</span>
+            <div id="timerContainer" class="hidden bg-white text-blue-900 border border-blue-200 shadow-sm px-4 py-1.5 rounded-full flex items-center space-x-2">
+                <i class="fa-solid fa-stopwatch text-blue-600 animate-pulse"></i>
+                <span id="timerText" class="font-mono text-sm md:text-base font-bold">00:00</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 mt-6">
+    <main class="max-w-3xl mx-auto px-4 mt-6">
 
         <!-- LANGKAH 1: MASUKKAN NAMA SISWA -->
-        <section id="step1" class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 md:p-8 card-glow">
+        <section id="step1" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 card-shadow">
             <div class="text-center max-w-md mx-auto">
-                <div class="inline-block p-4 bg-blue-500/10 rounded-full mb-3 text-blue-400">
-                    <i class="fa-solid fa-bolt-lightning text-4xl"></i>
+                <div class="inline-block p-4 bg-blue-50 rounded-full mb-3 text-blue-600">
+                    <i class="fa-solid fa-bolt-lightning text-3xl"></i>
                 </div>
-                <h2 class="text-2xl font-extrabold text-white mb-2">Tantangan Balap Analisis Teks</h2>
-                <p class="text-slate-400 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak dan mulai perlombaan!</p>
+                <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Tantangan Balap Analisis Teks</h2>
+                <p class="text-slate-500 text-sm mb-6">Masukkan nama lengkap kamu untuk mendapatkan teks fenomena alam secara acak dan mulai perlombaan!</p>
 
-                <div class="space-y-4">
-                    <input type="text" id="studentName" placeholder="Masukkan Nama Lengkap Kamu..." 
-                        class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition">
+                <div class="space-y-4 text-left">
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Nama Lengkap Siswa</label>
+                    <input type="text" id="studentName" placeholder="Contoh: Budi Santoso" 
+                        class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition shadow-sm">
                     
                     <button onclick="startChallenge()" 
-                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition transform active:scale-95 flex items-center justify-center space-x-2">
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/20 transition transform active:scale-95 flex items-center justify-center space-x-2 mt-2">
                         <span>Mulai Tantangan Sekarang</span>
                         <i class="fa-solid fa-rocket"></i>
                     </button>
@@ -72,27 +72,27 @@
         <section id="step2" class="hidden space-y-6">
 
             <!-- Card Informasi Siswa & Teks -->
-            <div class="bg-slate-800 border border-blue-500/30 rounded-2xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 card-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <div class="flex items-center space-x-2">
                         <span class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Peserta:</span>
-                        <span id="displayName" class="text-blue-400 font-bold"></span>
+                        <span id="displayName" class="text-blue-600 font-bold"></span>
                     </div>
-                    <h3 id="textTitle" class="text-xl font-extrabold text-white mt-1"></h3>
-                    <span class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">Topik: Fenomena Alam</span>
+                    <h3 id="textTitle" class="text-lg md:text-xl font-extrabold text-slate-900 mt-0.5"></h3>
+                    <span class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">Topik: Fenomena Alam</span>
                 </div>
-                <div class="bg-blue-950/80 border border-blue-500/40 p-3 rounded-xl text-xs text-blue-200">
-                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-blue-400"></i> Status Lomba:</p>
-                    <p class="text-slate-300 mt-0.5">Selesaikan analisis di bawah secepat mungkin lalu kirimkan tugasmu!</p>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-800 w-full md:w-auto">
+                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-amber-600"></i> Status Lomba:</p>
+                    <p class="text-amber-700 mt-0.5">Kerjakan dengan teliti dan cepat!</p>
                 </div>
             </div>
 
             <!-- Bacaan Teks Paragraf Utuh -->
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open text-blue-400"></i> Bacaan Teks Eksplanasi (Paragraf Utuh)
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow">
+                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-blue-600"></i> Bacaan Teks Eksplanasi (Paragraf Utuh)
                 </h4>
-                <div id="textContent" class="text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-xl border border-slate-800 text-justify">
+                <div id="textContent" class="text-slate-700 leading-relaxed space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200 text-justify text-sm md:text-base">
                     <!-- Teks dimuat dinamis -->
                 </div>
             </div>
@@ -101,78 +101,78 @@
             <div id="lkpdContainer" class="space-y-6">
 
                 <!-- TUGAS 1: ANALISIS STRUKTUR & ALASAN -->
-                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-6">
-                    <div class="border-b border-slate-700 pb-3">
-                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-yellow-400"></i> Tugas 1: Analisis Struktur Teks Eksplanasi
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow space-y-6">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h4 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-blue-600"></i> Tugas 1: Analisis Struktur Teks Eksplanasi
                         </h4>
-                        <p class="text-xs text-slate-400 mt-1">Kutiplah kalimat dari teks, lalu jelaskan alasan mengapa kutipan tersebut termasuk ke dalam struktur bagian tersebut berdasarkan cirinya.</p>
+                        <p class="text-xs text-slate-500 mt-1">Kutiplah kalimat dari teks, lalu jelaskan alasan mengapa kutipan tersebut termasuk ke dalam struktur bagian tersebut berdasarkan cirinya.</p>
                     </div>
 
                     <!-- 1. Identifikasi Fenomena -->
-                    <div class="space-y-3 bg-slate-900/40 p-4 rounded-xl border border-slate-700/60">
-                        <label class="block font-bold text-blue-300 text-sm">1. Bagian: Identifikasi Fenomena (Pernyataan Umum)</label>
+                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <label class="block font-bold text-slate-800 text-xs md:text-sm">1. Bagian: Identifikasi Fenomena (Pernyataan Umum)</label>
                         <textarea id="struct1_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                         <textarea id="struct1_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Identifikasi Fenomena? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                     </div>
 
                     <!-- 2. Urutan Sebab-Akibat -->
-                    <div class="space-y-3 bg-slate-900/40 p-4 rounded-xl border border-slate-700/60">
-                        <label class="block font-bold text-blue-300 text-sm">2. Bagian: Urutan Sebab-Akibat (Deretan Penjelas)</label>
+                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <label class="block font-bold text-slate-800 text-xs md:text-sm">2. Bagian: Urutan Sebab-Akibat (Deretan Penjelas)</label>
                         <textarea id="struct2_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                         <textarea id="struct2_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Urutan Sebab-Akibat? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                     </div>
 
                     <!-- 3. Ulasan -->
-                    <div class="space-y-3 bg-slate-900/40 p-4 rounded-xl border border-slate-700/60">
-                        <label class="block font-bold text-blue-300 text-sm">3. Bagian: Ulasan (Interpretasi / Penutup)</label>
+                    <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <label class="block font-bold text-slate-800 text-xs md:text-sm">3. Bagian: Ulasan (Interpretasi / Penutup)</label>
                         <textarea id="struct3_quote" rows="2" placeholder="Salin kutipan kalimat dari teks..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                         <textarea id="struct3_reason" rows="2" placeholder="Alasan: Mengapa bagian ini disebut Ulasan? (Sebutkan cirinya)..." 
-                            class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-sm"></textarea>
                     </div>
                 </div>
 
                 <!-- TUGAS 2: PEMAHAMAN INFORMASI ISI TEKS -->
-                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-4">
-                    <div class="border-b border-slate-700 pb-3">
-                        <h4 class="text-lg font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-circle-question text-blue-400"></i> Tugas 2: Pemahaman Informasi Isi Teks
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 card-shadow space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h4 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-question text-blue-600"></i> Tugas 2: Pemahaman Informasi Isi Teks
                         </h4>
-                        <p class="text-xs text-slate-400 mt-1">Jawablah pertanyaan berdasarkan isi teks fenomena alam yang kamu baca.</p>
+                        <p class="text-xs text-slate-500 mt-1">Jawablah pertanyaan berdasarkan isi teks fenomena alam yang kamu baca.</p>
                     </div>
 
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-300 mb-1">1. Peristiwa apa yang dibahas dalam teks tersebut, dan bagaimana proses awal terjadinya?</label>
-                            <textarea id="q1" rows="2" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">1. Peristiwa apa yang dibahas dalam teks tersebut, dan bagaimana proses awal terjadinya?</label>
+                            <textarea id="q1" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-300 mb-1">2. Apa saja faktor atau penyebab utama yang memicu terjadinya fenomena alam tersebut?</label>
-                            <textarea id="q2" rows="2" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">2. Apa saja faktor atau penyebab utama yang memicu terjadinya fenomena alam tersebut?</label>
+                            <textarea id="q2" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-300 mb-1">3. Apa pelajaran, kesimpulan, atau dampak penting dari fenomena tersebut bagi kehidupan manusia?</label>
-                            <textarea id="q3" rows="2" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500" placeholder="Tuliskan jawabanmu..."></textarea>
+                            <label class="block text-xs md:text-sm font-semibold text-slate-800 mb-1">3. Apa pelajaran, kesimpulan, atau dampak penting dari fenomena tersebut bagi kehidupan manusia?</label>
+                            <textarea id="q3" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-600 shadow-sm" placeholder="Tuliskan jawabanmu..."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- TOMBOL AKSI SELESAI -->
-                <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                    <button onclick="sendToEmail()" 
-                        class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Kirim Jawaban ke Email Guru</span>
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="copyAnswers()" 
+                        class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center space-x-2 text-sm md:text-base">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Salin Jawaban untuk WhatsApp</span>
                     </button>
                     <button onclick="downloadPDF()" 
-                        class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-6 py-4 rounded-xl transition flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-file-pdf text-red-400"></i>
-                        <span>Unduh PDF</span>
+                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center space-x-2 text-sm md:text-base">
+                        <i class="fa-solid fa-file-pdf text-red-600"></i>
+                        <span>Unduh PDF Rapi</span>
                     </button>
                 </div>
             </div>
@@ -181,7 +181,6 @@
     </main>
 
     <script>
-        // DAFTAR 3 TEKS FENOMENA ALAM KELAS 9
         const naturalTexts = [
             {
                 title: "Proses Terjadinya Pelangi",
@@ -193,7 +192,7 @@
             },
             {
                 title: "Proses Terjadinya Hujan Es",
-                content: "Hujan es atau yang dalam ilmu meteorologi dikenal sebagai fenomena hail merupakan salah satu bentuk presipitasi berupa bola-bola es yang turun ke bumi. Fenomena ekstrem ini biasanya terjadi pada masa peralihan musim (pancaroba) dan didahului oleh cuaca panas terik sejak pagi hari. Proses terjadinya hujan es berawal dari pertumbuhan awan Cumulonimbus yang menjulang tinggi secara vertikal di atmosfer akibat pemanasan matahari yang kuat. Di dalam awan cumulonimbus yang sangat tinggi dan dingin tersebut, terdapat arus udara naik yang sangat kuat (strong updraft). Arus udara naik ini membawa butir-butir air hujan ke bagian atas awan yang bersuhu di bawah titik beku, sehingga air tersebut langsung membeku menjadi butiran es. Butiran es yang terbentuk kemudian jatuh karena gravitasi, namun terangkat kembali ke atas oleh arus udara panas, menumpuk lapisan es baru berulang-ulang hingga ukurannya semakin besar dan berat. Ketika arus udara naik tidak lagi mampu menahan berat butiran es tersebut, es akan meluncur deras jatuh ke bumi sebagai hujan es lebat yang sering kali disertai angin kencang dan petir."
+                content: "Hujan es atau yang dalam ilmu meteorologi dikenal sebagai fenomena hail merupakan salah satu bentuk presipitasi berupa bola-bola es yang turun ke bumi. Fenomena ekstrem ini biasanya terjadi pada masa peralihan musim (pancaroba) dan didahului oleh cuaca panas terik sejak pagi hari. Proses terjadinya hujan es berawal dari pertumbuhan awan Cumulonimbus yang menjulang tinggi secara vertikal di atmosfer akibat pemanasan matahari yang kuat. Di dalam awan cumulonimbus yang sangat tinggi dan dingin tersebut, terdapat arus udara naik yang sangat kuat (strong updraft). Arus udara naik ini membawa butir-butir air hujan ke bagian atas awan yang bersuhu di bawah titik beku, sehingga air tersebut langsung membeku menjadi butiran es. Butiran es yang terbentuk kemudian jatuh karena gravitasi, namun terangkat kembali ke atas oleh arus udara panas, menumpuk lapisan es berulang-ulang hingga ukurannya semakin besar dan berat. Ketika arus udara naik tidak lagi mampu menahan berat butiran es tersebut, es akan meluncur deras jatuh ke bumi sebagai hujan es lebat yang sering kali disertai angin kencang dan petir."
             }
         ];
 
@@ -208,7 +207,6 @@
                 return;
             }
 
-            // Pilih teks secara acak dari 3 teks fenomena alam
             const randomIndex = Math.floor(Math.random() * naturalTexts.length);
             selectedText = naturalTexts[randomIndex];
 
@@ -216,16 +214,13 @@
             document.getElementById('textTitle').innerText = selectedText.title;
             document.getElementById('textContent').innerText = selectedText.content;
 
-            // Sembunyikan step 1, tampilkan step 2
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
             document.getElementById('timerContainer').classList.remove('hidden');
 
-            // Mulai Timer
             startTime = new Date();
             timerInterval = setInterval(updateTimer, 1000);
 
-            // Efek Confetti awal mulai
             confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
         }
 
@@ -239,7 +234,7 @@
 
         function getFormData() {
             return {
-                name: document.getElementById('studentName').innerText || document.getElementById('studentName').value,
+                name: document.getElementById('displayName').innerText || document.getElementById('studentName').value,
                 textTitle: selectedText.title,
                 time: document.getElementById('timerText').innerText,
                 s1_q: document.getElementById('struct1_quote').value,
@@ -254,49 +249,56 @@
             };
         }
 
-        function sendToEmail() {
+        function copyAnswers() {
             const data = getFormData();
             if (!data.s1_q || !data.q1) {
-                alert('Harap isi beberapa kolom jawaban analisis sebelum mengirimkan tugas!');
+                alert('Harap isi beberapa kolom jawaban analisis sebelum menyalin!');
                 return;
             }
 
-            // GANTI EMAIL DI BAWAH INI DENGAN EMAIL ANDA
-            const guruEmail = "kelompokpengajaran@gmail.com"; 
+            const textToCopy = 
+`*TUGAS LKPD TEKS EKSPLANASI*
+Nama: ${data.name}
+Judul Teks: ${data.textTitle}
+Waktu: ${data.time}
 
-            const subject = encodeURIComponent(`Tugas LKPD Teks Eksplanasi - ${data.name}`);
-            const body = encodeURIComponent(
-                `Halo Guru,\n\nBerikut adalah hasil LKPD Teks Eksplanasi Fenomena Alam:\n\n` +
-                `Nama Siswa: ${data.name}\n` +
-                `Judul Teks: ${data.textTitle}\n` +
-                `Waktu Pengerjaan: ${data.time}\n\n` +
-                `=== TUGAS 1: ANALISIS STRUKTUR ===\n` +
-                `1. Identifikasi Fenomena:\n- Kutipan: ${data.s1_q}\n- Alasan: ${data.s1_r}\n\n` +
-                `2. Urutan Sebab-Akibat:\n- Kutipan: ${data.s2_q}\n- Alasan: ${data.s2_r}\n\n` +
-                `3. Ulasan:\n- Kutipan: ${data.s3_q}\n- Alasan: ${data.s3_r}\n\n` +
-                `=== TUGAS 2: PEMAHAMAN ISI TEKS ===\n` +
-                `1. Proses Terjadinya:\n${data.q1}\n\n` +
-                `2. Faktor Utama:\n${data.q2}\n\n` +
-                `3. Kesimpulan/Dampak:\n${data.q3}\n`
-            );
+*1. Analisis Struktur:*
+- Identifikasi Fenomena: "${data.s1_q}" (Alasan: ${data.s1_r})
+- Urutan Sebab-Akibat: "${data.s2_q}" (Alasan: ${data.s2_r})
+- Ulasan: "${data.s3_q}" (Alasan: ${data.s3_r})
 
-            // Buka aplikasi email otomatis di HP siswa
-            window.location.href = `mailto:${guruEmail}?subject=${subject}&body=${body}`;
+*2. Pemahaman Isi:*
+1. ${data.q1}
+2. ${data.q2}
+3. ${data.q3}`;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Berhasil! Jawaban sudah disalin ke memori HP. Silakan tempel (paste) ke WhatsApp Guru.');
+            }).catch(err => {
+                alert('Gagal menyalin, silakan gunakan fitur Unduh PDF Rapi saja.');
+            });
             
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            alert('Aplikasi email di HP kamu akan segera terbuka. Silakan tekan tombol kirim pada aplikasi emailmu!');
         }
 
         function downloadPDF() {
             const element = document.getElementById('step2');
+            
+            // Sembunyikan tombol aksi saat PDF dibuat
+            const actionButtons = element.querySelector('#lkpdContainer > div:last-child');
+            if (actionButtons) actionButtons.style.display = 'none';
+
             const opt = {
-                margin:       0.5,
-                filename:     `LKPD_Eksplanasi_Fenomena_Alam.pdf`,
+                margin:       [0.4, 0.4, 0.4, 0.4],
+                filename:     `LKPD_${document.getElementById('displayName').innerText.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().from(element).save();
+
+            html2pdf().from(element).set(opt).save().then(() => {
+                if (actionButtons) actionButtons.style.display = 'flex';
+            });
         }
     </script>
 </body>
